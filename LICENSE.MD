@@ -1,6 +1,6 @@
 # Licence
 
-Copyright © VNG Realisatie 2017  
+Copyright © VNG Realisatie 2018  
 Licensed under the EUPL
 
 **Table of Contents**
