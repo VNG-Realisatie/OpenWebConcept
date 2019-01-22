@@ -1,0 +1,79 @@
+<owc>
+	<berichten>
+		<bericht titel="Intentieverklaring">
+			<h1>Vier gemeenten kijken met digitale dienstverlening ver over eigen grenzen</h1>
+			<p>Een gemeente in Gelderland, eentje in Zuid-Holland en twee in Friesland hebben de handen ineen geslagen om de digitale dienstverlening aan hun inwoners te verbeteren. Door de bijzondere samenwerking kunnen de vier gemeenten praktijkgerichter werken én kosten besparen.</p>
+			<p>“Voorheen waren we afhankelijk van de planning van grote leveranciers”, vertelt informatieadviseur en initiatiefnemer van het Open Webconcept Holger Peters van gemeente Buren (Gelderland). “Nu we zelf aan de knoppen zitten, kunnen we sneller vernieuwen en onze dienstverlening aanpassen aan de wensen van onze inwoners.”</p> 
+			<h2>Open Webconcept</h2>
+			<p>In 2015 ging Heerenveen als eerste gemeente live met een WordPress website. Buren volgde kort daarna en startte in 2016 het initiatief van het Open Webconcept. De OpenPDC (producten en dienstencatalogus) was de eerste module in rij. Inmiddels is de OpenPDC uitgebreid en gebruiken steeds meer gemeenten deze. Zo ging 5 november gemeente Lansingerland (Zuid-Holland) live. Gemeente Súdwest-Fryslân volgt en lanceert op 29 november haar nieuwe website. </p>
+			<p>“Deze samenwerking bevestigt dat wij in 2015 een goed keuze hebben gemaakt”, zegt wethouder Hans Broekhuizen van Heerenveen. “We kijken er naar uit om onze kennis en ervaringen in te zetten voor meer dan alleen onze gemeente. Tegelijkertijd voelen we ons gesteund en geïnspireerd door de inbreng van onze vakgenoten van Lansingerland, Buren en Súdwest-Fryslân.”</p>
+			<h2>Innovatiever en voordeliger</h2>
+			<p>De nieuwe werkwijze van de vier is volgens het zogeheten Open Webconcept. Vanuit de overtuiging dat de digitale dienstverlening voor gemeenten innovatiever en voordeliger kan is de samenwerking Open Webconcept ontstaan. Het doel van de samenwerking is praktisch samenwerken met gemeenten en leveranciers om doorontwikkeling, flexibiliteit en continuïteit te realiseren.</p>
+			<h2>Continu ontwikkelen</h2>
+			<p>“We willen dat onze inwoners en ondernemers 24/7 de mogelijkheid hebben om benodigde informatie snel te vinden en producten en diensten aan te vragen of te regelen”, zegt Eduard Witteveen, procesbegeleider innovatie  van Súdwest-Fryslân. “De website wordt hierin een steeds belangrijker kanaal. Het is daarom nodig om continu ontwikkeling mogelijk te maken. Deze samenwerking stelt ons in staat om dit te doen.”</p>
+			<h2>Common Ground</h2>
+			<p>‘’We geloven erin samen te ontwikkelen en kennis en ervaringen te delen. En de regie hierin te pakken. Dit in navolging van de ontwikkelingen die op dit moment ook spelen bij ander gemeenten in Nederland zoals de Common Ground gedachte.’’ Aldus Burgermeester Jan de Boer, van gemeente Buren. ‘’Tijdens de Fieldlab Dienstverlening in Zwolle van de VNG realisatie hebben we hier al gezamenlijk concrete resultaten neergezet. Samen ontwikkelden we de basis voor een webapp voor meldingen woon- en leefomgeving met gebruik van NLX. Hiermee hebben we laten zien dat samenwerkende (kleinere) gemeenten flinke stappen kunnen zetten.'</p>
+			<h2>Over grenzen heen</h2>
+			<p>Samenwerking met buurgemeenten is dagelijkse praktijk in gemeenteland. Maar hoe vonden de Gelderse, Zuid-Hollandse en twee Friese gemeenten elkaar? Waar WordPress het meest gebruikte content management systeem in de wereld is, wordt deze nog maar weinig gebruikt door gemeenten. “Alle vier hebben wij de keuze gemaakt om met dit systeem, dat zoveel doorontwikkeling mogelijk maakt, te gaan werken”, zegt wethouder Simon Fortuyn van Lansingerland. “Daarom gaan wij graag over provinciegrenzen heen om onze ambities te realiseren.”</p>
+			<h2>Ondertekening verklaring</h2>
+			<p>Om de samenwerking en verdere ontwikkeling van het concept te bekrachtigen tekenden de vier gemeenten op 8 november een verklaring. Daarin maken ze afspraken over het beheren van de verschillende bouwstenen, zodat deze veilig beschikbaar blijven voor andere gemeenten en leveranciers. De gemeenten liggen fysiek ver uit elkaar. De ondertekening vond daarom plaats via een live-verbinding. Wel zo passend gezien het onderwerp.</p>
+			<p>De intentieverklaring valt terug te vinden op <a href="https://github.com/VNG-Realisatie/OpenWebConcept/Intentieverklaring Wordpress Open Webconcept.pdf">github</a></p>
+		</bericht>
+		<bericht titel="Over de plugin">
+			<h1>De OpenWebConcept Plugin maakt het installeren makkelijker</h1>
+			<p>Met het installeren van de OpenWebConcept-plugin wordt het in één keer mogelijk om te beschikken over alle openwebconcept plugins.</p>			
+			<p>Voor elke plugin verzorgd één gemeente heb beheer: de plugin wordt compatible gehouden met een ondersteunde versie van Wordpress en issues worden opgepakt</p>
+			<p>De plugins waarnaar verwezen worden kunnen uit 2 bronnen komen: https://github.com/VNG-Realisatie/OpenWebConcept/ en https://bitbucket.org/openwebconcept/</p>
+			<h2>De openbare plugins</h2>
+			<p>Op https://github.com/VNG-Realisatie/OpenWebConcept/ staan de publiek beschikbare plugins, deze zijn door iedereen te gebruiken.</p>
+			<h2>De gemeentelijke plugins</h2>
+			<p>Op https://bitbucket.org/openwebconcept/ staan de gemeentelijke plugins, deze zijn door gemeenten te gebruiken.</p>
+			<p>Een gemeente kan op haar beurt toegang aanvragen voor een leverancier waarmee ze een overeenkomst heeft.</p>
+		</bericht>		
+	</berichten>
+	<plugins>
+		<plugin 
+			naam="OpenPDC"
+			url="https://bitbucket.org/openwebconcept/owc-openpub/wp-owc-openpub-plugin.zip"
+			toegang="Gemeentelijk"
+			licentie="EUPL"
+			kosten="geen"
+			gemeente="https://www.buren.nl/"
+			ambtenaar="hpeters@buren.nl"
+			issues="https://bitbucket.org/openwebconcept/owc-openpub/issues"
+			icon="https://cdn2.iconfinder.com/data/icons/design-theme/64/d68-128.png"
+		>
+			<h1>Producten en Diensten catalogus</h1>
+			<p>De OpenPDC is een heel mooi ding</p>
+			<p>Voor goede werking, verschillende onderdelen</p>
+		</plugin>
+		<plugin 
+			naam="Gravity Forms DigiD Login"
+			url="https://bitbucket.org/openwebconcept/....."
+			toegang="Gemeentelijk"
+			licentie="Mozilla"
+			kosten="https://www.gravityforms.com/pricing/"
+			gemeente="https://www.heerenveen.nl/"
+			ambtenaar="swoudstra@heerenveen.nl"
+			issues="https://bitbucket.org/openwebconcept/.../issues"
+			icon="https://cdn1.iconfinder.com/data/icons/sitemap-cards/256/form-03-128.png"
+		>
+			<h1>Formulieren met een login</h1>
+			<p>Door DigID te koppelen aan Gravity Forms kan er door de gemeente snel en op een eigenmanier een invulling worden gegeven aan het maken van e-formulieren</p>
+		</plugin>		
+		<plugin 
+			naam="mijn.gemeente.nl"
+			url="https://github.com/VNG-Realisatie/OpenWebConcept/mijn.gemeente.nl/plugin.zip"
+			toegang="Open"
+			licentie="EUPL"
+			kosten="geen"
+			gemeente="https://sudwestfryslan.nl/"
+			ambtenaar="e.witteveen@sudwestfryslan.nl"
+			issues="https://github.com/VNG-Realisatie/OpenWebConcept/issues"
+			icon="https://cdn0.iconfinder.com/data/icons/100-popular-requests-1/70/icon_sets_100_popular_requests_outline_iconfinder-78-128.png"
+		>
+			<h1>Formulieren met een login</h1>
+			<p>Door DigID te koppelen aan Gravity Forms kan er door de gemeente snel en op een eigenmanier een invulling worden gegeven aan het maken van e-formulieren</p>
+		</plugin>				
+	</plugins>
+</owc>
