@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<OWCData>
+	<Packages>
+		<Group title="Open PDC">
+			<Package name="Plugin PDC - Basis" type="plugin" host="bitbucket" private="true">
+				<slug>pdc-base</slug>
+				<uri>https://bitbucket.org/openwebconcept/plugin-pdc-base</uri>
+				<branch>master</branch>
+				<method>downloads</method>
+			</Package>
+		</Group>
+	</Packages>
+</OWCData>

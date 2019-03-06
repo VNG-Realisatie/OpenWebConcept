@@ -1,0 +1,5 @@
+{
+    "require": {
+        "stevenmaguire/oauth2-bitbucket": "^3.0"
+    }
+}
