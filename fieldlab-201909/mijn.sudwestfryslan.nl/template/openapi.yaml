@@ -1,0 +1,379 @@
+openapi: 3.0.1
+info:
+  title: mijn.sudwestfryslan.nl/api
+  description: >-
+    Dit is een stub om te kijken of we mijn.sudwestfryslan.nl werkend kunnen
+    krijgen
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    email: e.witteveen@sudwestfryslan.nl
+  license:
+    name: EUPL 1.2
+    url: "https://opensource.org/licenses/EUPL-1.2"
+  version: 1.0.0
+externalDocs:
+  description: Find out more about Swagger
+  url: "http://swagger.io"
+servers:
+  - url: "https://mijn.sudwestfryslan.nl/api"
+  - url: "http://mijn.sudwestfryslan.nl/api"
+tags:
+  - name: inwoner
+    description: Gegevens van de betreffende burger
+  - name: zaak
+    description: Zaken van de betreffende burger
+  - name: document
+    description: Documenten van de betreffende burger
+  - name: gebruik
+    description: Gebruik van de gegevens van de betreffende burger
+paths:
+  "/inwoner":
+    get:
+      tags:
+        - inwoner
+      summary: Geef de beschikbare gegevens terug van de betreffende burger
+      description: Geeft een lijst van gegevens terug
+      operationId: getInwoner
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Inwoner"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/Inwoner"
+        "400":
+          description: Ongeldige BSN meegegeven
+          content: {}
+        "404":
+          description: BSN niet gevonden
+          content: {}
+  "/documenten":
+    get:
+      tags:
+        - document
+      summary: Geef de (niet zaak-)documenten terug van de betreffende burger
+      description: Geeft een lijst van documenten terug
+      operationId: getDocumenten
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Document"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/Document"
+        "400":
+          description: Ongeldige BSN meegegeven
+          content: {}
+        "404":
+          description: BSN niet gevonden
+          content: {}
+  "/documenten/{documentenidentificatie}":
+    get:
+      tags:
+        - document
+        - zaak
+      summary: Geef het (zaak-)document terug met de betreffende documentidentificatie
+      description: Geef het (zaak-)document terug met de betreffende documentidentificatie
+      operationId: getDocumentByIdentiticatie
+      parameters:
+        - name: documentenidentificatie
+          in: path
+          description: identificatie van het document to return
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Document"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/Document"
+        "400":
+          description: Ongeldige BSN meegegeven
+          content: {}
+        "404":
+          description: BSN niet gevonden
+          content: {}
+  "/zaken":
+    get:
+      tags:
+        - zaak
+      summary: Geef de zaken terug  terug van de betreffende burger
+      description: Geeft een lijst van zaken terug
+      operationId: getZaken
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Zaak"
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Zaak"
+        "400":
+          description: Ongeldige BSN meegegeven
+          content: {}
+        "404":
+          description: BSN niet gevonden
+          content: {}
+  "/zaak/{zaakidentificatie}":
+    get:
+      tags:
+        - zaak
+      summary: Geef de zaak terug met de betreffende zaakidentificatie
+      description: Geef de zaak terug met de betreffende zaakidentificatie
+      operationId: getZaakByIdentiticatie
+      parameters:
+        - name: zaakidentificatie
+          in: path
+          description: identificatie van de zaak to return
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Zaak"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/Zaak"
+        "400":
+          description: Ongeldige BSN meegegeven
+          content: {}
+        "404":
+          description: BSN niet gevonden
+          content: {}
+  "/zaak/{zaakidentificatie}/documenten":
+    get:
+      tags:
+        - document
+      summary: Geef de documenten terug  van de betreffende zaak
+      description: Geeft een lijst van documenten terug
+      operationId: getZaakDocumenten
+      parameters:
+        - name: zaakidentificatie
+          in: path
+          description: identificatie van de zaak to return
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Document"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/Document"
+        "400":
+          description: Ongeldige BSN meegegeven
+          content: {}
+        "404":
+          description: BSN niet gevonden
+          content: {}
+
+  "/zaak/{zaakidentificatie}/opmerking":
+    post:
+      tags:
+        - zaak
+        - document
+      summary: Voeg een opmerking toe aan een bestaande zaak
+      description: Voeg een opmerking toe aan een bestaande zaak
+      operationId: postZaakOpmerkingDocumenten
+      parameters:
+        - name: zaakidentificatie
+          in: path
+          description: identificatie van de zaak to add the opmerking
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                name:
+                  type: string
+                  description: Onderwerp
+                status:
+                  type: string
+                  description: Opmerkingen
+      responses:
+        "405":
+          description: Invalid input
+          content: {}
+  "/zaak/{zaakidentificatie}/bestand":
+    post:
+      tags:
+        - zaak
+        - document
+      summary: Voeg een bestand toe aan een bestaande zaak
+      description: Voeg een bestand toe aan een bestaande zaak
+      operationId: postZaakBestandDocumenten
+      parameters:
+        - name: zaakidentificatie
+          in: path
+          description: identificatie van de zaak to add the opmerking
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              properties:
+                additionalMetadata:
+                  type: string
+                  description: Bestandsnaam
+                file:
+                  type: string
+                  description: file to upload
+                  format: binary
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse"
+  "/gebruik":
+    get:
+      tags:
+        - gebruik
+      summary: Geef gebruik van de informatie terug van de betreffende burger
+      description: Geeft een lijst het gebruik terug
+      operationId: getGebruik
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Gebruik"
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Gebruik"
+        "400":
+          description: Ongeldige BSN meegegeven
+          content: {}
+        "404":
+          description: BSN niet gevonden
+          content: {}
+components:
+  schemas:
+    Inwoner:
+      type: object
+      properties:
+        bsn:
+          type: string
+        voornaam:
+          type: string
+        achternaam:
+          type: string
+        geboortedatum:
+          type: string
+          format: date
+        geboorteland:
+          type: string
+        geslacht:
+          type: string
+          enum:
+            - man
+            - vrouw
+        nationaliteit:
+          type: string
+        postcode:
+          type: string
+        huisnummer:
+          type: string
+        straat:
+          type: string
+        woonplaats:
+          type: string
+        telefoon:
+          type: string
+        email:
+          type: string
+      xml:
+        name: Inwoner
+    Zaak:
+      type: object
+      properties:
+        identificatie:
+          type: string
+        type:
+          type: string
+        omschrijving:
+          type: string
+        aanmaakdatum:
+          type: string
+          format: date
+        status:
+          type: string
+        wijzigingsdatum:
+          type: string
+          format: date
+        einddatum:
+          type: string
+          format: date
+        resultaat:
+          type: string
+      xml:
+        name: Zaak
+    Document:
+      type: object
+      properties:
+        identificatie:
+          type: string
+        type:
+          type: string
+        bestandsnaam:
+          type: string
+        aanmaakdatum:
+          type: string
+          format: date
+      xml:
+        name: Document
+    Gebruik:
+      type: object
+      properties:
+        identificatie:
+          type: string
+        omschrijving:
+          type: string
+      xml:
+        name: Gebruik
+    ApiResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        type:
+          type: string
+        message:
+          type: string
