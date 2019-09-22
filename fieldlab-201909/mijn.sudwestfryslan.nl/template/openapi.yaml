@@ -1,9 +1,32 @@
+# in Visual Studio Code with Arjun.swagger-viewer
+# press shift-alt-P
+#
+# gedachte is om met header in request een bsn/referentie naar persoon mee te nemen
+# eigenlijk zijn 
 openapi: 3.0.1
 info:
   title: mijn.sudwestfryslan.nl/api
   description: >-
     Dit is een stub om te kijken of we mijn.sudwestfryslan.nl werkend kunnen
-    krijgen
+    krijgen. 
+    
+    
+    Er 4 functionele informatie stromen te onderkennen:
+
+    1. persoonsgegevens, Tonen van de gegevens die de gemeente  van de burger heeft
+    
+    2. zaakinformatie, tonen van de zaken met status met hierbinnen
+      * mogelijkheid om de zaak-documenten in te zien
+      * opmerkingen toevoegen aan een (lopende) zaak
+      * bijlages toe te voegen aan een (lopende) zaak
+      (gelijk werking gidso/suite4SD)
+    3. documenten, tonen van de documenten in/uitgaand en of deze zijn "afgehandeld"
+      * mogelijkheid om inkomende post in te zien
+      * mogelijkheid om uitgaande post in te zien (vervanging van brieven?)
+      * gelijk de slimme-corsa-formulieren nieuwe documenten met bijlage toevoegen
+    4. inzage waar je gegevens gebruikt worden, vanuit AVG moet dit en is nu een heel duur 
+      proces, dus FG/Ciso worden vast blij met deze transparantie
+
   termsOfService: "http://swagger.io/terms/"
   contact:
     email: e.witteveen@sudwestfryslan.nl
