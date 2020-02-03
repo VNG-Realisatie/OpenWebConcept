@@ -1,0 +1,19 @@
+{
+    "open-pdc": {
+        "title": "Open PDC",
+        "plugins": [
+            {
+                "name": "Plugin PDC - Basis",
+                "description": "",
+                "owner": "Gemeente Buren",
+                "type": "plugin",
+                "host": "bitbucket",
+                "private": true,
+                "slug": "pdc-base",
+                "url": "",
+                "branch": "master",
+                "method": "downloads"
+            }
+        ]
+    }
+}
