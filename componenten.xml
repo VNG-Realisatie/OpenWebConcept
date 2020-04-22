@@ -9,5 +9,12 @@
 				<method>downloads</method>
 			</Package>
 		</Group>
+		<Group title="Data In Map">
+			<Package name="Data In Map" type="plugin" host="direct" private="false">
+				<slug>gh-datainmap</slug>
+				<uri>https://bitbucket.org/gemeenteheerenveen/datainmap-plugin/downloads/gh-datainmap-latest.zip</uri>
+				<method>direct</method>
+			</Package>
+		</Group>
 	</Packages>
 </OWCData>
