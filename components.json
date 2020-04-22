@@ -15,5 +15,21 @@
                 "method": "downloads"
             }
         ]
+    },
+    "datainmap": {
+        "title": "Data In Map",
+        "plugins": [
+            {
+                "name": "Data In Map",
+                "description": "Data In Map is een plugin voor het ontsluiten van informatie door middel van geografische kaarten.",
+                "owner": "Gemeente Heerenveen",
+                "type": "plugin",
+                "host": "direct",
+                "private": false,
+                "slug": "gh-datainmap",
+                "url": "https://bitbucket.org/gemeenteheerenveen/datainmap-plugin/downloads/gh-datainmap-latest.zip",
+                "method": "direct"
+            }
+        ]
     }
 }
