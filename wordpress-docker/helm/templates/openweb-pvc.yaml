@@ -1,10 +1,16 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: {{ .Values.volume.claimName }}
+  name: {{ .Values.openweb.volume.claimName }}
+  labels:
+    app.kubernetes.io/name: {{ .Values.openweb.volume.claimName }}
+    app.kubernetes.io/part-of: {{ .Values.settings.name }}
+    helm.sh/chart: {{ include "chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
 spec:
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: {{ .Values.volume.size }}
+      storage: {{ .Values.openweb.volume.size }}

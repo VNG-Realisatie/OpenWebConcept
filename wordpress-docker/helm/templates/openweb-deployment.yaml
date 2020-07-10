@@ -12,7 +12,7 @@ spec:
   selector:
     matchLabels:
       app.kubernetes.io/name: {{ .Values.settings.name }}-wordpress
-  replicas: 1
+  replicas: {{ .Values.settings.replicaCount }}
   template:
     metadata:
       labels:
@@ -23,9 +23,9 @@ spec:
         app.kubernetes.io/managed-by: {{ .Release.Service }}
     spec:
       volumes:
-        - name: {{ .Values.volume.name }}
+        - name: {{ .Values.openweb.volume.name }}
           persistentVolumeClaim:
-            claimName: {{ .Values.volume.claimName }}
+            claimName: {{ .Values.openweb.volume.claimName }}
 
       containers:
         - name: {{ .Values.settings.name }}-wordpress
@@ -34,7 +34,7 @@ spec:
           ports:
             - containerPort: 80
           volumeMounts:
-            - name: {{ .Values.volume.name }}
+            - name: {{ .Values.openweb.volume.name }}
               mountPath: wordpress
               subPath: /bitnami/wordpress
           env:
@@ -61,7 +61,7 @@ spec:
             - name: WORDPRESS_DATABASE_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: {{ include "wordpress.databaseSecretName" . }}
+                  name: {{ template "fullname" . }}
                   key: mariadb-password
           resources:
   {{ toYaml .Values.resources | indent 12 }}
