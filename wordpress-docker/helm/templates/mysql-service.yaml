@@ -9,7 +9,7 @@ metadata:
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
 spec:
-  type: ClusterIp
+  type: ClusterIP
   ports:
     - name: mysql
       port: {{ .Values.mysql.port }}

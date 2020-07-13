@@ -29,40 +29,46 @@ spec:
 
       containers:
         - name: {{ .Values.settings.name }}-wordpress
-          image: "{{ .Values.settings.registryBase }}/{{ .Values.settings.openwebconcept }}:4.8"
+          image: "{{ .Values.settings.registryBase }}/openwebconcept:4.8"
           imagePullPolicy: {{ .Values.settings.pullPolicy }}
           ports:
             - containerPort: 80
           volumeMounts:
             - name: {{ .Values.openweb.volume.name }}
-              mountPath: wordpress
-              subPath: /bitnami/wordpress
+              mountPath: /bitnami/wordpress
+              subPath: wordpress
           env:
-            - name: MARIADB_HOST
+            - name: WORDPRESS_SCHEME
+              value: https
+            - name: WORDPRESS_DB_HOST
               valueFrom:
                 configMapKeyRef:
                   name: {{ .Values.settings.name }}-configmap
                   key: mariadb-host
-            - name: MARIADB_PORT_NUMBER
+            - name: WORDPRESS_DB_PORT_NUMBER
               valueFrom:
                 configMapKeyRef:
                   name: {{ .Values.settings.name }}-configmap
                   key: mariadb-port
-            - name: WORDPRESS_DATABASE_NAME
+            - name: WORDPRESS_DB_NAME
               valueFrom:
                 configMapKeyRef:
                   name: {{ .Values.settings.name }}-configmap
                   key: mariadb-name
-            - name: WORDPRESS_DATABASE_USER
+            - name: WORDPRESS_DB_USER
               valueFrom:
                 configMapKeyRef:
                   name: {{ .Values.settings.name }}-configmap
                   key: mariadb-user
-            - name: WORDPRESS_DATABASE_PASSWORD
+            - name: WORDPRESS_DB_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: {{ template "fullname" . }}
                   key: mariadb-password
+            - name: WORDPRESS_TABLE_PREFIX
+              value: 'wp_'
+            - name: WORDPRESS_SKIP_INSTALL
+              value: 'yes'
           resources:
   {{ toYaml .Values.resources | indent 12 }}
   {{- if .Values.nodeSelector }}

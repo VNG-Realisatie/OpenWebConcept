@@ -1,4 +1,5 @@
 settings:
+  registryBase: docker.io/conduction
   name: owc
   pullPolicy: Always
   replicaCount: 1
@@ -10,8 +11,8 @@ mysql:
   port: 3306
   name: openweb
   user: openweb
-  password: !changeMe!
-  rootPassword: !changeMe!
+  password: '!changeMe!'
+  rootPassword: '!changeMe!'
   volume:
     claimName: openweb-database
     size: 8Gi
@@ -21,6 +22,10 @@ openweb:
     name: openweb-data
     claimName: openweb-data
     size: 10Gi
+
+busybox:
+  image: "busybox"
+  tag: "1.32"
 
 ingress:
   annotations:

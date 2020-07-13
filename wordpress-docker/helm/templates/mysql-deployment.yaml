@@ -24,86 +24,79 @@ spec:
         app.kubernetes.io/instance: {{ .Release.Name }}
         app.kubernetes.io/managed-by: {{ .Release.Service }}
     spec:
-    {{- if .Values.securityContext.enabled }}
-      securityContext:
-        fsGroup: {{ .Values.securityContext.fsGroup }}
-        runAsUser: {{ .Values.securityContext.runAsUser }}
-    {{- end }}
       initContainers:
         - name: "remove-lost-found"
           image: "{{ .Values.busybox.image}}:{{ .Values.busybox.tag }}"
           imagePullPolicy: {{ .Values.imagePullPolicy | quote }}
           resources:
-      command:  ["rm", "-fr", "/var/lib/mysql/lost+found"]
-      volumeMounts:
-        - name: {{ .Values.mysql.volume.claimName }}
-          mountPath: /var/lib/mysql
+          command:  ["rm", "-fr", "/var/lib/mysql/lost+found"]
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/mysql
       nodeSelector:
         {{ toYaml .Values.nodeSelector | indent 8 }}
-        {{- end }}
       containers:
         - name: {{ .Values.settings.name }}-mysql
           image: mysql:5.7
           imagePullPolicy: {{ .Values.settings.pullpolicy | quote }}
           resources:
             {{ toYaml .Values.resources | indent 10 }}
-        env:
-          - name: MYSQL_ALLOW_EMPTY_PASSWORD
-            value: "false"
-            {{- end }}
-          - name: MYSQL_ROOT_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: {{ template "fullname" . }}
-                key: mysql-root-password
-          - name: MYSQL_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: {{ template "fullname" . }}
-                key: mariadb-password
-          - name: MYSQL_USER
-            valueFrom:
-              configMapKeyRef:
-                name: {{ .Values.settings.name }}-configmap
-                key: mariadb-user
-          - name: MYSQL_DATABASE
+          env:
+            - name: MYSQL_ALLOW_EMPTY_PASSWORD
+              value: "false"
+            - name: MYSQL_ROOT_PASSWORD
               valueFrom:
-              configMapKeyRef:
-                name: {{ .Values.settings.name }}-configmap
-                key: mariadb-name
-            {{- if .Values.timezone }}
-          - name: TZ
-            value: {{ .Values.timezone }}
-            {{- end }}
-        ports:
-          - name: mysql
-            containerPort: 3306
+                secretKeyRef:
+                  name: {{ template "fullname" . }}
+                  key: mysql-root-password
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "fullname" . }}
+                  key: mariadb-password
+            - name: MYSQL_USER
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Values.settings.name }}-configmap
+                  key: mariadb-user
+            - name: MYSQL_DATABASE
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Values.settings.name }}-configmap
+                  key: mariadb-name
+          ports:
+            - name: mysql
+              containerPort: 3306
 
-        livenessProbe:
-          exec:
-            command:
-            - sh
-            - -c
-            - "mysqladmin ping -u root -p${MYSQL_ROOT_PASSWORD}"
-          initialDelaySeconds: 30
-          periodSeconds: 10
-          timeoutSeconds: 5
-          successThreshold: 1
-          failureThreshold: 3
+          livenessProbe:
+            exec:
+              command:
+              - sh
+              - -c
+              - "mysqladmin ping -u root -p${MYSQL_ROOT_PASSWORD}"
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            successThreshold: 1
+            failureThreshold: 3
 
-        readinessProbe:
-          exec:
-            command:
-            - sh
-            - -c
-            - "mysqladmin ping -u root -p${MYSQL_ROOT_PASSWORD}"
-          initialDelaySeconds: 5
-          periodSeconds: 10
-          timeoutSeconds: 1
-          successThreshold: 1
-          failureThreshold: 3
+          readinessProbe:
+            exec:
+              command:
+              - sh
+              - -c
+              - "mysqladmin ping -u root -p${MYSQL_ROOT_PASSWORD}"
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            timeoutSeconds: 1
+            successThreshold: 1
+            failureThreshold: 3
 
-        volumes:
-          - name: data
-            persistentVolumeClaim:
-              claimName: {{ .Values.mysql.volume.claimName }}
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/mysql
+
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: {{ .Values.mysql.volume.claimName }}

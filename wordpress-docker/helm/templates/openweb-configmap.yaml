@@ -11,10 +11,10 @@ metadata:
     app.kubernetes.io/managed-by: {{ .Release.Service }}
 data:
   {{ if .Values.mysql.host }}
-  mariadb-host: {{ .Values.mysql.host }}
+  mariadb-host: 'mysql://{{ .Values.mysql.host }}'
   {{ else }}
-  mariadb-host: {{ .Values.settings.name }}-database
+  mariadb-host: 'mysql://{{ .Values.settings.name }}-mysql'
   {{ end }}
-  mariadb-port: {{ .Values.mysql.port }}
-  mariadb-name: {{ .Values.mysql.dbname }}
+  mariadb-port: {{ .Values.mysql.port | toString | quote }}
+  mariadb-name: {{ .Values.mysql.name }}
   mariadb-user: {{ .Values.mysql.user }}
