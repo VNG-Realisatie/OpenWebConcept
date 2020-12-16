@@ -18,12 +18,17 @@ spec:
     - {{ $.Values.settings.domain }}
     secretName: {{ template "fullname" . }}
   rules:
-    {{- if and (eq $.Values.settings.env "prod") $.Values.settings.subdomain }}
+    {{- if and (eq $.Values.settings.env "prod") $.Values.settings.subpath }}
 
-    - host: {{ $.Values.settings.subdomain }}.{{ $.Values.settings.domain }}
+    - host: {{ $.Values.settings.domain }}
       http:
           paths:
-                - backend:
+                - path: /{{ $.Values.settings.subpath }}/(.*)
+                  backend:
+                    serviceName: {{ $.Values.settings.name }}
+                    servicePort: 80
+                - path: /{{ $.Values.settings.subpath }}(.*)
+                  backend:
                     serviceName: {{ $.Values.settings.name }}
                     servicePort: 80
     {{- else if eq $.Values.settings.env "prod" }}
@@ -40,12 +45,26 @@ spec:
             - backend:
                 serviceName: {{ $.Values.settings.name }}
                 servicePort: 80
-    {{- else }}
+    {{- else if $.Values.settings.subpath }}
 
-    - host: {{ $.Values.settings.subdomain }}.{{ $.Values.settings.env }}.{{ $.Values.settings.domain }}
+    - host: {{ $.Values.settings.env }}.{{ $.Values.settings.domain }}
       http:
           paths:
-            - backend:
+            - path: /{{ $.Values.settings.subpath }}/(.*)
+              backend:
+                serviceName: {{ $.Values.settings.name }}
+                servicePort: 80
+            - path: /{{ $.Values.settings.subpath }}(.*)
+              backend:
+                serviceName: {{ $.Values.settings.name }}
+                servicePort: 80
+    {{- else }}
+    - host: {{ $.Values.settings.env }}.{{ $.Values.settings.domain }}
+      http:
+          paths:
+
+            - path: /(.*)
+              backend:
                 serviceName: {{ $.Values.settings.name }}
                 servicePort: 80
     {{- end }}

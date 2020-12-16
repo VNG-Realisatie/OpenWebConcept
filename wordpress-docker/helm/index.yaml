@@ -1,0 +1,16 @@
+apiVersion: v1
+entries:
+  owc:
+  - apiVersion: v1
+    appVersion: V.0.1
+    created: "2020-12-16T12:39:34.798975+01:00"
+    description: '&#039;Naast deze JSON rest API is er ook een [graphql](/graphql)
+      interface beschikbaar.&#039;'
+    digest: 0729aee3be92a8763ab75cde6279acf876202dfc9232438d7e79f3c929528d47
+    home: pc.zaakonline.nl
+    icon: pc.zaakonline.nl
+    name: owc
+    urls:
+    - owc-0.1.0.tgz
+    version: 0.1.0
+generated: "2020-12-16T12:39:34.786711+01:00"
