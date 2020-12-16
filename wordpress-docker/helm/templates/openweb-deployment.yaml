@@ -69,6 +69,26 @@ spec:
               value: 'wp_'
             - name: WORDPRESS_SKIP_INSTALL
               value: 'yes'
+            - name: WORDPRESS_SITEURL
+              {{- if and (eq $.Values.settings.env "prod") $.Values.settings.subpath }}
+              value: https://{{ $.Values.settings.domain }}/{{ $.Values.settings.subpath }}
+              {{- else if eq $.Values.settings.env "prod" }}
+              value: https://{{ $.Values.settings.domain }}
+              {{- else if $.Values.settings.subpath }}
+              value: https://{{ $.Values.settings.env }}.{{ $.Values.settings.domain }}/{{ $.Values.settings.subpath }}
+              {{- else }}
+              value: https://{{ $.Values.settings.env }}.{{ $.Values.settings.domain }}
+              {{- end }}
+            - name: WORDPRESS_HOME
+              {{- if and (eq $.Values.settings.env "prod") $.Values.settings.subpath }}
+              value: https://{{ $.Values.settings.domain }}/{{ $.Values.settings.subpath }}
+              {{- else if eq $.Values.settings.env "prod" }}
+              value: https://{{ $.Values.settings.domain }}
+              {{- else if $.Values.settings.subpath }}
+              value: https://{{ $.Values.settings.env }}.{{ $.Values.settings.domain }}/{{ $.Values.settings.subpath }}
+              {{- else }}
+              value: https://{{ $.Values.settings.env }}.{{ $.Values.settings.domain }}
+              {{- end }}
           resources:
   {{ toYaml .Values.resources | indent 12 }}
   {{- if .Values.nodeSelector }}
