@@ -4,7 +4,7 @@ settings:
   pullPolicy: Always
   replicaCount: 1
   env: prod
-  subpath: owc
+  subpath: ''
   domain: zuid-drecht.nl
 
 mysql:
