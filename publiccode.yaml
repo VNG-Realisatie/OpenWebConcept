@@ -1,0 +1,121 @@
+publiccodeYmlVersion: "0.2"
+
+name: openwebconcept
+applicationSuite: commonground
+url: "https://github.com/ConductionNL/commongroundnu"
+landingURL: "dev.commonground.nu" 
+isBasedOn: "https://github.com/ConductionNL/Proto-component-commonground.git" 
+softwareVersion: "V1.0"
+releaseDate: "2021-31-01"
+logo: www.commonground.nl
+monochromeLogo: img/logo-mono.svg
+
+inputTypes:
+  - application/json
+  - application/xml
+  
+outputTypes:
+  - application/json
+  - application/ld+json
+  - application/hal+json
+  - application/vnd.api+json
+  - application/health+json
+  - application/xml
+  - application/x-yaml
+  - text/csv
+  - text/html
+
+platforms:
+  - web
+  - haven
+  - nlx
+
+categories:
+  - it-development 
+
+usedBy:
+  - Gemeente Utrecht
+  - Gemeente Den Haag
+  - Gemeente Hoorn
+  
+
+roadmap: "https://github.com/ConductionNL/commongroundnu/blob/master/ROADMAP.md"
+
+developmentStatus: development
+
+softwareType: "standalone/other"
+
+#intendedAudience:
+#  scope:
+#    - science-and-technology
+#  countries:
+#    - it
+#    - de
+#  unsupportedCountries:
+#    - us
+
+description:
+  en:
+#    localisedName: Medusa
+#    genericName: Text Editor
+#    shortDescription: >
+#          This description can have a maximum 150
+#          characters long. We should not fill the
+#          remaining space with "Lorem Ipsum". End
+#
+#    longDescription: >
+#          Very long description of this software, also split
+#          on multiple rows. You should note what the software
+#          is and why one should need it.
+
+    documentation: "https://github.com/ConductionNL/commongroundnu/blob/master/README.md"
+    apiDocumentation: "dev.commonground.nu"
+#
+#    features:
+#       - Very important feature
+#       - Will run without a problem
+#       - Has zero bugs
+#       - Solves all the problems of the world
+#    screenshots:
+#       - img/sshot1.jpg
+#       - img/sshot2.jpg
+#       - img/sshot3.jpg
+#    videos:
+#       - https://youtube.com/xxxxxxxx
+#    awards:
+#       - 1st Price Software of the year
+
+legal:
+  license: EUPL-1.2
+  mainCopyrightOwner: Open Webconcept
+  repoOwner: Conduction
+  authorsFile: AUTHORS.md
+
+maintenance:
+  type: "internal"
+
+  contractors:
+    - name: "Conduction B.V"
+      email: "info@conduction.nl"
+      website: "https://www.conduction.nl"
+      until: "2099-01-01"
+
+  contacts:
+    - name: Ruben van der Linde
+      email: "ruben@conduction.nl"
+      affiliation: "Conduction B.V"
+
+localisation:
+  localisationReady: yes
+  availableLanguages:
+    - en
+    - nl
+
+dependsOn:
+  open:
+    - name: Kubernetes
+      versionMin: "1.15.5-do.1"
+
+installations:
+  - type: helm
+    url: "https://raw.githubusercontent.com/ConductionNL/OpenWebConcept/master/wordpress-docker/helm/"
