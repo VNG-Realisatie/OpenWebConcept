@@ -1,6 +1,6 @@
 publiccodeYmlVersion: "0.2"
 
-name: openwebconcept
+name: owc
 applicationSuite: commonground
 url: "https://github.com/ConductionNL/commongroundnu"
 landingURL: "dev.commonground.nu" 
