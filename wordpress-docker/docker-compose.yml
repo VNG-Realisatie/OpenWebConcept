@@ -22,6 +22,7 @@ services:
     command: ["--ignore-db-dir=lost+found", "--innodb_use_native_aio=0"]
     environment:
       MYSQL_ROOT_PASSWORD: wp_project
+      MYSQL_DATABASE: wp_project
     networks:
       - back
   phpmyadmin:
