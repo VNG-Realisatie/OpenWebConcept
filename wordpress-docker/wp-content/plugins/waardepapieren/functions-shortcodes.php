@@ -25,16 +25,14 @@ function waardepapieren_list_shortcode() {
  * Catching the custom post
  */
 
-function waardepapieren_post() {
+function waardepapieren_post(array $post = [] ) {
     $organization = get_option('waardepapieren_organization');
     $key = get_option('waardepapieren_api_key');
     $endpoint = get_option('waardepapieren_api_endpoint');
-    //var_dump($organization);
-    //var_dump($key);
-    //var_dump($endpoint);
-    //var_dump($_POST);
 
-    $post = ["person"=>$_POST["bsn"],"type"=>$_POST["type"],"organization"=>$organization];
+    if (empty($post)) {
+        $post = ["person"=>$_POST["bsn"],"type"=>$_POST["type"],"organization"=>$organization];
+    }
 
     $data = wp_remote_post($endpoint, array(
         'headers'     => array('Content-Type' => 'application/json; charset=utf-8', 'Authorization' => $key),
