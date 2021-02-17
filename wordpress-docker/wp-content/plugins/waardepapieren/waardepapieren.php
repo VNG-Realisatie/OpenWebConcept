@@ -46,6 +46,9 @@ class WaardepapierenPlugin {
         // Include the admin settings
         include WAARDEPAPIEREN_PLUGIN_DIR . '/classes/class-waardepapieren-plugin-admin-settings.php';
 
+        // Include the admin settings
+        include WAARDEPAPIEREN_PLUGIN_DIR . '/classes/class-field-waardepapier.php';
+
         // The function file
         require_once WAARDEPAPIEREN_PLUGIN_DIR . '/functions-grafityforms.php';
 
