@@ -138,59 +138,59 @@ class GFWaarepapierAddOn extends GFAddOn {
                                 'value' => 'akte_van_geboorte',
                             ),
                             array(
-                                'label' => esc_html__( 'Second Choice', 'waardepapierenaddon' ),
+                                'label' => esc_html__( 'Akte van huwelijk', 'waardepapierenaddon' ),
                                 'value' => 'akte_van_huwelijk',
                             ),
                             array(
-                                'label' => esc_html__( 'Third Choice', 'waardepapierenaddon' ),
+                                'label' => esc_html__( 'Akte van overlijden', 'waardepapierenaddon' ),
                                 'value' => 'akte_van_overlijden',
                             ),
                             array(
-                                'label' => esc_html__( 'Third Choice', 'waardepapierenaddon' ),
+                                'label' => esc_html__( 'Akte van registratie van een partnershap', 'waardepapierenaddon' ),
                                 'value' => 'akte_van_registratie_van_een_partnerschap',
                             ),
                             array(
-                                'label' => esc_html__( 'Third Choice', 'waardepapierenaddon' ),
+                                'label' => esc_html__( 'Akte van omzetting van een huwelijk in een registratie van een partnerschap', 'waardepapierenaddon' ),
                                 'value' => 'akte_van_omzetting_van_een_huwelijk_in_een_registratie_van_een_partnerschap',
                             ),
                             array(
-                                'label' => esc_html__( 'Third Choice', 'waardepapierenaddon' ),
+                                'label' => esc_html__( 'Akte van omzetting van een registratie van een partnerschap', 'waardepapierenaddon' ),
                                 'value' => 'akte_van_omzetting_van_een_registratie_van_een_partnerschap',
                             ),
                             array(
-                                'label' => esc_html__( 'Third Choice', 'waardepapierenaddon' ),
+                                'label' => esc_html__( 'Verklaring diploma\'s', 'waardepapierenaddon' ),
                                 'value' => 'verklaring_diplomas',
                             ),
                             array(
-                                'label' => esc_html__( 'Third Choice', 'waardepapierenaddon' ),
+                                'label' => esc_html__( 'Verklaring inkomen', 'waardepapierenaddon' ),
                                 'value' => 'verklaring_inkomen',
                             ),
                             array(
-                                'label' => esc_html__( 'Third Choice', 'waardepapierenaddon' ),
+                                'label' => esc_html__( 'Verklaring studieschuld', 'waardepapierenaddon' ),
                                 'value' => 'verklaring_studieschuld',
                             ),
                             array(
-                                'label' => esc_html__( 'Third Choice', 'waardepapierenaddon' ),
+                                'label' => esc_html__( 'Verklaring van huwelijksbevoegdheid', 'waardepapierenaddon' ),
                                 'value' => 'verklaring_van_huwelijksbevoegdheid',
                             ),
                             array(
-                                'label' => esc_html__( 'Third Choice', 'waardepapierenaddon' ),
+                                'label' => esc_html__( 'Verklaring van in leven zijn', 'waardepapierenaddon' ),
                                 'value' => 'verklaring_van_in_leven_zijn',
                             ),
                             array(
-                                'label' => esc_html__( 'Third Choice', 'waardepapierenaddon' ),
+                                'label' => esc_html__( 'Verklaring van nederlandershap', 'waardepapierenaddon' ),
                                 'value' => 'verklaring_van_nederlandershap',
                             ),
                             array(
-                                'label' => esc_html__( 'Third Choice', 'waardepapierenaddon' ),
+                                'label' => esc_html__( 'Uittreksel basis registratie personen', 'waardepapierenaddon' ),
                                 'value' => 'uittreksel_basis_registratie_personen',
                             ),
                             array(
-                                'label' => esc_html__( 'Third Choice', 'waardepapierenaddon' ),
+                                'label' => esc_html__( 'Uittreksel registratie niet ingezetenen', 'waardepapierenaddon' ),
                                 'value' => 'uittreksel_registratie_niet_ingezetenen',
                             ),
                             array(
-                                'label' => esc_html__( 'Third Choice', 'waardepapierenaddon' ),
+                                'label' => esc_html__( 'Historisch uittreksel basis registratie personen', 'waardepapierenaddon' ),
                                 'value' => 'historisch_uittreksel_basis_registratie_personen',
                             ),
                         ),
