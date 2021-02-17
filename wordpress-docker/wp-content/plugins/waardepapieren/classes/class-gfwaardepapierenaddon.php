@@ -111,7 +111,7 @@ class GFWaarepapierAddOn extends GFAddOn {
                         'label'   => esc_html__( 'Person', 'waardepapierenaddon' ),
                         'type'    => 'select',
                         'name'    => 'person',
-                        'tooltip' => esc_html__( 'This is the tooltip', 'waardepapierenaddon' ),
+                        'tooltip' => esc_html__( 'Select a person for wich to require a certificate', 'waardepapierenaddon' ),
                         'choices' => array(
                             array(
                                 'label' => esc_html__( 'First Choice', 'waardepapierenaddon' ),
@@ -131,10 +131,10 @@ class GFWaarepapierAddOn extends GFAddOn {
                         'label'   => esc_html__( 'Certificate', 'waardepapierenaddon' ),
                         'type'    => 'select',
                         'name'    => 'certificate',
-                        'tooltip' => esc_html__( 'This is the tooltip', 'waardepapierenaddon' ),
+                        'tooltip' => esc_html__( 'The certificate to be required', 'waardepapierenaddon' ),
                         'choices' => array(
                             array(
-                                'label' => esc_html__( 'First Choice', 'waardepapierenaddon' ),
+                                'label' => esc_html__( 'Akte van geboorte', 'waardepapierenaddon' ),
                                 'value' => 'akte_van_geboorte',
                             ),
                             array(
