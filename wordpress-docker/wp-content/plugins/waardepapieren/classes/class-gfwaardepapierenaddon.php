@@ -107,6 +107,7 @@ class GFWaarepapierAddOn extends GFAddOn {
             array(
                 'title'  => esc_html__( 'Waardepapieren Form Settings', 'waardepapierenaddon' ),
                 'fields' => array(
+                    /*
                     array(
                         'label'   => esc_html__( 'My checkbox', 'waardepapierenaddon' ),
                         'type'    => 'checkbox',
@@ -174,10 +175,11 @@ class GFWaarepapierAddOn extends GFAddOn {
                             ),
                         ),
                     ),
+                    */
                     array(
-                        'label'   => esc_html__( 'My Dropdown', 'waardepapierenaddon' ),
+                        'label'   => esc_html__( 'Person', 'waardepapierenaddon' ),
                         'type'    => 'select',
-                        'name'    => 'mydropdown',
+                        'name'    => 'person',
                         'tooltip' => esc_html__( 'This is the tooltip', 'waardepapierenaddon' ),
                         'choices' => array(
                             array(
@@ -194,6 +196,27 @@ class GFWaarepapierAddOn extends GFAddOn {
                             ),
                         ),
                     ),
+                    array(
+                        'label'   => esc_html__( 'Certificate', 'waardepapierenaddon' ),
+                        'type'    => 'select',
+                        'name'    => 'certificate',
+                        'tooltip' => esc_html__( 'This is the tooltip', 'waardepapierenaddon' ),
+                        'choices' => array(
+                            array(
+                                'label' => esc_html__( 'First Choice', 'waardepapierenaddon' ),
+                                'value' => 'first',
+                            ),
+                            array(
+                                'label' => esc_html__( 'Second Choice', 'waardepapierenaddon' ),
+                                'value' => 'second',
+                            ),
+                            array(
+                                'label' => esc_html__( 'Third Choice', 'waardepapierenaddon' ),
+                                'value' => 'third',
+                            ),
+                        ),
+                    ),
+                    /*
                     array(
                         'label'             => esc_html__( 'My Text Box', 'waardepapierenaddon' ),
                         'type'              => 'text',
@@ -237,6 +260,7 @@ class GFWaarepapierAddOn extends GFAddOn {
                             ),
                         ),
                     ),
+                    */
                 ),
             ),
         );
