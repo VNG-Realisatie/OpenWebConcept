@@ -30,6 +30,12 @@ if ( ! defined('WAARDEPAPIEREN_PLUGIN_BASENAME')) define('WAARDEPAPIEREN_PLUGIN_
 if ( ! defined('WAARDEPAPIEREN_PLUGIN_URL')) define('WAARDEPAPIEREN_PLUGIN_URL', plugins_url( WAARDEPAPIEREN_PLUGIN_BASENAME ));
 if ( ! defined('WAARDEPAPIEREN_PLUGIN_AUTH_KEY')) define('WAARDEPAPIEREN_PLUGIN_AUTH_KEY', AUTH_KEY);
 
+
+// Lets define the minimal Grafity Forms Version
+
+if ( ! defined('GF_WAARDEPAPIEREN_ADDON_VERSION')) define('GF_WAARDEPAPIEREN_ADDON_VERSION', '1.9');
+
+
 class WaardepapierenPlugin {
 
     public function __construct()
