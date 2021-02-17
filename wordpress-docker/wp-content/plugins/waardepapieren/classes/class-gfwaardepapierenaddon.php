@@ -7,7 +7,7 @@ GFForms::include_addon_framework();
 
 class GFWaarepapierAddOn extends GFAddOn {
 
-    protected $_version = GF_WAARDEPAPIEREN_ADDON_VERSION;
+    protected $_version = WAARDEPAPIEREN_PLUGIN_VERSION;
     protected $_min_gravityforms_version = '1.9';
     protected $_slug = 'waardepapieren';
     protected $_path = 'waardepapieren/waardepapieren.php';
@@ -18,6 +18,7 @@ class GFWaarepapierAddOn extends GFAddOn {
     private static $_instance = null;
 
     public static function get_instance() {
+
         if ( self::$_instance == null ) {
             self::$_instance = new GFWaarepapierAddOn();
         }

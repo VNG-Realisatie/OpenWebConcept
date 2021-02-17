@@ -6,7 +6,7 @@
 class WaardepapierenPlugingGafityforms {
 
     public function __construct() {
-        add_action( 'gform_loaded', array( 'GF_Simple_AddOn_Bootstrap', 'load' ), 5 );
+        add_action( 'gform_loaded', array( $this, 'load' ), 5 );
     }
 
     /*
@@ -21,7 +21,8 @@ class WaardepapierenPlugingGafityforms {
 
         require_once( 'class-gfwaardepapierenaddon.php' );
 
-        GFAddOn::register( 'GFWaarepapierAddOn' );
+        GFAddOn::register( GFWaarepapierAddOn::class );
+        GF_Fields::register( new GF_Field_WaardePapier() );
     }
 
     function gf_simple_addon() {
