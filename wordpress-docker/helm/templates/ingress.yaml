@@ -30,12 +30,14 @@ spec:
     - host: {{ $.Values.settings.domain }}
       http:
           paths:
+            - path: /(.*)
             - backend:
                 serviceName: {{ $.Values.settings.name }}
                 servicePort: 80
     - host: www.{{ $.Values.settings.domain }}
       http:
           paths:
+            - path: /(.*)
             - backend:
                 serviceName: {{ $.Values.settings.name }}
                 servicePort: 80

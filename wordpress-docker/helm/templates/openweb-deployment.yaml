@@ -39,7 +39,7 @@ spec:
               subPath: wordpress
           env:
             - name: WORDPRESS_SCHEME
-              value: https
+              value: http
             - name: WORDPRESS_DB_HOST
               valueFrom:
                 configMapKeyRef:
@@ -71,23 +71,23 @@ spec:
               value: 'yes'
             - name: WORDPRESS_SITEURL
               {{- if and (eq $.Values.settings.env "prod") $.Values.settings.subpath }}
-              value: https://{{ $.Values.settings.domain }}/{{ $.Values.settings.subpath }}
+              value: http://{{ $.Values.settings.domain }}/{{ $.Values.settings.subpath }}
               {{- else if eq $.Values.settings.env "prod" }}
-              value: https://{{ $.Values.settings.domain }}
+              value: http://{{ $.Values.settings.domain }}
               {{- else if $.Values.settings.subpath }}
-              value: https://{{ $.Values.settings.env }}.{{ $.Values.settings.domain }}/{{ $.Values.settings.subpath }}
+              value: http://{{ $.Values.settings.env }}.{{ $.Values.settings.domain }}/{{ $.Values.settings.subpath }}
               {{- else }}
-              value: https://{{ $.Values.settings.env }}.{{ $.Values.settings.domain }}
+              value: http://{{ $.Values.settings.env }}.{{ $.Values.settings.domain }}
               {{- end }}
             - name: WORDPRESS_HOME
               {{- if and (eq $.Values.settings.env "prod") $.Values.settings.subpath }}
-              value: https://{{ $.Values.settings.domain }}/{{ $.Values.settings.subpath }}
+              value: http://{{ $.Values.settings.domain }}/{{ $.Values.settings.subpath }}
               {{- else if eq $.Values.settings.env "prod" }}
-              value: https://{{ $.Values.settings.domain }}
+              value: http://{{ $.Values.settings.domain }}
               {{- else if $.Values.settings.subpath }}
-              value: https://{{ $.Values.settings.env }}.{{ $.Values.settings.domain }}/{{ $.Values.settings.subpath }}
+              value: http://{{ $.Values.settings.env }}.{{ $.Values.settings.domain }}/{{ $.Values.settings.subpath }}
               {{- else }}
-              value: https://{{ $.Values.settings.env }}.{{ $.Values.settings.domain }}
+              value: http://{{ $.Values.settings.env }}.{{ $.Values.settings.domain }}
               {{- end }}
           resources:
   {{ toYaml .Values.resources | indent 12 }}
