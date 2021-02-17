@@ -107,75 +107,6 @@ class GFWaarepapierAddOn extends GFAddOn {
             array(
                 'title'  => esc_html__( 'Waardepapieren Form Settings', 'waardepapierenaddon' ),
                 'fields' => array(
-                    /*
-                    array(
-                        'label'   => esc_html__( 'My checkbox', 'waardepapierenaddon' ),
-                        'type'    => 'checkbox',
-                        'name'    => 'enabled',
-                        'tooltip' => esc_html__( 'This is the tooltip', 'waardepapierenaddon' ),
-                        'choices' => array(
-                            array(
-                                'label' => esc_html__( 'Enabled', 'waardepapierenaddon' ),
-                                'name'  => 'enabled',
-                            ),
-                        ),
-                    ),
-                    array(
-                        'label'   => esc_html__( 'My checkboxes', 'waardepapierenaddon' ),
-                        'type'    => 'checkbox',
-                        'name'    => 'checkboxgroup',
-                        'tooltip' => esc_html__( 'This is the tooltip', 'waardepapierenaddon' ),
-                        'choices' => array(
-                            array(
-                                'label' => esc_html__( 'First Choice', 'waardepapierenaddon' ),
-                                'name'  => 'first',
-                            ),
-                            array(
-                                'label' => esc_html__( 'Second Choice', 'waardepapierenaddon' ),
-                                'name'  => 'second',
-                            ),
-                            array(
-                                'label' => esc_html__( 'Third Choice', 'waardepapierenaddon' ),
-                                'name'  => 'third',
-                            ),
-                        ),
-                    ),
-                    array(
-                        'label'   => esc_html__( 'My Radio Buttons', 'waardepapierenaddon' ),
-                        'type'    => 'radio',
-                        'name'    => 'myradiogroup',
-                        'tooltip' => esc_html__( 'This is the tooltip', 'waardepapierenaddon' ),
-                        'choices' => array(
-                            array(
-                                'label' => esc_html__( 'First Choice', 'waardepapierenaddon' ),
-                            ),
-                            array(
-                                'label' => esc_html__( 'Second Choice', 'waardepapierenaddon' ),
-                            ),
-                            array(
-                                'label' => esc_html__( 'Third Choice', 'waardepapierenaddon' ),
-                            ),
-                        ),
-                    ),
-                    array(
-                        'label'      => esc_html__( 'My Horizontal Radio Buttons', 'waardepapierenaddon' ),
-                        'type'       => 'radio',
-                        'horizontal' => true,
-                        'name'       => 'myradiogrouph',
-                        'tooltip'    => esc_html__( 'This is the tooltip', 'waardepapierenaddon' ),
-                        'choices'    => array(
-                            array(
-                                'label' => esc_html__( 'First Choice', 'waardepapierenaddon' ),
-                            ),
-                            array(
-                                'label' => esc_html__( 'Second Choice', 'waardepapierenaddon' ),
-                            ),
-                            array(
-                                'label' => esc_html__( 'Third Choice', 'waardepapierenaddon' ),
-                            ),
-                        ),
-                    ),
-                    */
                     array(
                         'label'   => esc_html__( 'Person', 'waardepapierenaddon' ),
                         'type'    => 'select',
@@ -204,63 +135,66 @@ class GFWaarepapierAddOn extends GFAddOn {
                         'choices' => array(
                             array(
                                 'label' => esc_html__( 'First Choice', 'waardepapierenaddon' ),
-                                'value' => 'first',
+                                'value' => 'akte_van_geboorte',
                             ),
                             array(
                                 'label' => esc_html__( 'Second Choice', 'waardepapierenaddon' ),
-                                'value' => 'second',
+                                'value' => 'akte_van_huwelijk',
                             ),
                             array(
                                 'label' => esc_html__( 'Third Choice', 'waardepapierenaddon' ),
-                                'value' => 'third',
+                                'value' => 'akte_van_overlijden',
+                            ),
+                            array(
+                                'label' => esc_html__( 'Third Choice', 'waardepapierenaddon' ),
+                                'value' => 'akte_van_registratie_van_een_partnerschap',
+                            ),
+                            array(
+                                'label' => esc_html__( 'Third Choice', 'waardepapierenaddon' ),
+                                'value' => 'akte_van_omzetting_van_een_huwelijk_in_een_registratie_van_een_partnerschap',
+                            ),
+                            array(
+                                'label' => esc_html__( 'Third Choice', 'waardepapierenaddon' ),
+                                'value' => 'akte_van_omzetting_van_een_registratie_van_een_partnerschap',
+                            ),
+                            array(
+                                'label' => esc_html__( 'Third Choice', 'waardepapierenaddon' ),
+                                'value' => 'verklaring_diplomas',
+                            ),
+                            array(
+                                'label' => esc_html__( 'Third Choice', 'waardepapierenaddon' ),
+                                'value' => 'verklaring_inkomen',
+                            ),
+                            array(
+                                'label' => esc_html__( 'Third Choice', 'waardepapierenaddon' ),
+                                'value' => 'verklaring_studieschuld',
+                            ),
+                            array(
+                                'label' => esc_html__( 'Third Choice', 'waardepapierenaddon' ),
+                                'value' => 'verklaring_van_huwelijksbevoegdheid',
+                            ),
+                            array(
+                                'label' => esc_html__( 'Third Choice', 'waardepapierenaddon' ),
+                                'value' => 'verklaring_van_in_leven_zijn',
+                            ),
+                            array(
+                                'label' => esc_html__( 'Third Choice', 'waardepapierenaddon' ),
+                                'value' => 'verklaring_van_nederlandershap',
+                            ),
+                            array(
+                                'label' => esc_html__( 'Third Choice', 'waardepapierenaddon' ),
+                                'value' => 'uittreksel_basis_registratie_personen',
+                            ),
+                            array(
+                                'label' => esc_html__( 'Third Choice', 'waardepapierenaddon' ),
+                                'value' => 'uittreksel_registratie_niet_ingezetenen',
+                            ),
+                            array(
+                                'label' => esc_html__( 'Third Choice', 'waardepapierenaddon' ),
+                                'value' => 'historisch_uittreksel_basis_registratie_personen',
                             ),
                         ),
                     ),
-                    /*
-                    array(
-                        'label'             => esc_html__( 'My Text Box', 'waardepapierenaddon' ),
-                        'type'              => 'text',
-                        'name'              => 'mytext',
-                        'tooltip'           => esc_html__( 'This is the tooltip', 'waardepapierenaddon' ),
-                        'class'             => 'medium',
-                        'feedback_callback' => array( $this, 'is_valid_setting' ),
-                    ),
-                    array(
-                        'label'   => esc_html__( 'My Text Area', 'waardepapierenaddon' ),
-                        'type'    => 'textarea',
-                        'name'    => 'mytextarea',
-                        'tooltip' => esc_html__( 'This is the tooltip', 'waardepapierenaddon' ),
-                        'class'   => 'medium merge-tag-support mt-position-right',
-                    ),
-                    array(
-                        'label' => esc_html__( 'My Hidden Field', 'waardepapierenaddon' ),
-                        'type'  => 'hidden',
-                        'name'  => 'myhidden',
-                    ),
-                    array(
-                        'label' => esc_html__( 'My Custom Field', 'waardepapierenaddon' ),
-                        'type'  => 'my_custom_field_type',
-                        'name'  => 'my_custom_field',
-                        'args'  => array(
-                            'text'     => array(
-                                'label'         => esc_html__( 'A textbox sub-field', 'waardepapierenaddon' ),
-                                'name'          => 'subtext',
-                                'default_value' => 'change me',
-                            ),
-                            'checkbox' => array(
-                                'label'   => esc_html__( 'A checkbox sub-field', 'waardepapierenaddon' ),
-                                'name'    => 'my_custom_field_check',
-                                'choices' => array(
-                                    array(
-                                        'label'         => esc_html__( 'Activate', 'waardepapierenaddon' ),
-                                        'name'          => 'subcheck',
-                                        'default_value' => true,
-                                    ),
-                                ),
-                            ),
-                        ),
-                    ),
-                    */
                 ),
             ),
         );
