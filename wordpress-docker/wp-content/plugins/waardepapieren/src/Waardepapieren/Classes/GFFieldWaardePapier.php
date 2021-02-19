@@ -5,22 +5,10 @@ namespace OWC\Waardepapieren\Classes;
 class GFFieldWaardePapier extends \GF_Field_Select
 {
     public $type = 'waardepapier';
-
-
-    private static $_instance = null;
-
-    public static function get_instance() {
-        if ( self::$_instance == null ) {
-            self::$_instance = new GFSimpleAddOn();
-        }
-
-        return self::$_instance;
-    }
-
-    public function init() {
-        parent::init();
-        add_filter( 'gform_submit_button', array( $this, 'form_submit_button' ), 10, 2 );
-    }
+    /**
+     * @var array|bool|mixed|string
+     */
+    public $choices;
 
     public function get_form_editor_field_title()
     {
@@ -37,7 +25,7 @@ class GFFieldWaardePapier extends \GF_Field_Select
 
     public function get_choices($value)
     {
-        return [
+        $this->choices = [
             [
                 'text' => 'Akte van geboorte',
                 'value' => 'akte_van_geboorte',
@@ -97,7 +85,8 @@ class GFFieldWaardePapier extends \GF_Field_Select
             [
                 'text' => 'Historisch uittreksel basis registratie personen',
                 'value' => 'historisch_uittreksel_basis_registratie_personen',
-            ],
+            ]
         ];
+        return \GFCommon::get_select_choices($this, $value);
     }
 }
