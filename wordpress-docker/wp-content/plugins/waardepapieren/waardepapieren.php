@@ -22,36 +22,23 @@
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  */
 
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
-if ( ! defined('WAARDEPAPIEREN_PLUGIN_VERSION')) define('WAARDEPAPIEREN_PLUGIN_VERSION', '1.0.0');
-if ( ! defined('WAARDEPAPIEREN_PLUGIN_FILE')) define('WAARDEPAPIEREN_PLUGIN_FILE', __FILE__);
-if ( ! defined('WAARDEPAPIEREN_PLUGIN_DIR')) define('WAARDEPAPIEREN_PLUGIN_DIR', dirname(__FILE__));
-if ( ! defined('WAARDEPAPIEREN_PLUGIN_BASENAME')) define('WAARDEPAPIEREN_PLUGIN_BASENAME', basename(WAARDEPAPIEREN_PLUGIN_DIR));
-if ( ! defined('WAARDEPAPIEREN_PLUGIN_URL')) define('WAARDEPAPIEREN_PLUGIN_URL', plugins_url( WAARDEPAPIEREN_PLUGIN_BASENAME ));
-if ( ! defined('WAARDEPAPIEREN_PLUGIN_AUTH_KEY')) define('WAARDEPAPIEREN_PLUGIN_AUTH_KEY', AUTH_KEY);
+use OWC\Waardepapieren\Autoloader;
+use OWC\Waardepapieren\Foundation\Plugin;
 
-class WaardepapierenPlugin {
-
-    public function __construct()
-    {
-        // The function file
-        require_once WAARDEPAPIEREN_PLUGIN_DIR . '/functions-shortcodes.php';
-
-        // Include the init class
-        include WAARDEPAPIEREN_PLUGIN_DIR . '/classes/class-waardepapieren-plugin-shortcodes.php';
-
-        // The function file
-        require_once WAARDEPAPIEREN_PLUGIN_DIR . '/functions-admin.php';
-
-        // Include the admin settings
-        include WAARDEPAPIEREN_PLUGIN_DIR . '/classes/class-waardepapieren-plugin-admin-settings.php';
-
-        // The function file
-        require_once WAARDEPAPIEREN_PLUGIN_DIR . '/functions-grafityforms.php';
-
-        // Include the admin settings
-        include WAARDEPAPIEREN_PLUGIN_DIR . '/classes/class-waardepapieren-plugin-grafityforms.php';
-    }
-
+/**
+ * If this file is called directly, abort.
+ */
+if (!defined('WPINC')) {
+    die;
 }
-$GLOBALS['waardepapieren-plugin'] = new WaardepapierenPlugin();
+
+/**
+ * Manual loaded file: the autoloader.
+ */
+require_once __DIR__ . '/autoloader.php';
+$autoloader = new Autoloader();
+
+/**
+ * Begin execution of the plugin.
+ */
+$plugin = (new Plugin(__DIR__))->boot();
