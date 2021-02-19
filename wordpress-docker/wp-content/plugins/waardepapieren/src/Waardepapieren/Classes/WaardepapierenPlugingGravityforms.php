@@ -22,7 +22,8 @@ class WaardepapierenPlugingGravityforms
         }
 
         \GFAddOn::register(GFWaardepapierAddOn::class);
-        \GF_Fields::register(new GFFieldWaardePapier());
+        \GF_Fields::register(new GFFieldWaardePapierType());
+        \GF_Fields::register(new GFFieldWaardePapierPerson());
     }
 
     public function gf_simple_addon()
