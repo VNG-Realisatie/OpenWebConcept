@@ -27,7 +27,8 @@ class Plugin
         new \OWC\Waardepapieren\Classes\WaardepapierenPluginAdminSettings();
         new \OWC\Waardepapieren\Classes\WaardepapierenPlugingGravityforms();
         new \OWC\Waardepapieren\Classes\GFWaardepapierAddOn();
-        new \OWC\Waardepapieren\Classes\GFFieldWaardePapier();
+        new \OWC\Waardepapieren\Classes\GFFieldWaardePapierType();
+        new \OWC\Waardepapieren\Classes\GFFieldWaardePapierPerson();
     }
 
     /**

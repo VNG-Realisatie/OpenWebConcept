@@ -2,29 +2,18 @@
 
 namespace OWC\Waardepapieren\Classes;
 
-class GFFieldWaardePapier extends \GF_Field_Select
+class GFFieldWaardePapierType extends \GF_Field_Select
 {
     public $type = 'waardepapier';
-    /**
-     * @var array|bool|mixed|string
-     */
+    public $label;
     public $choices;
+    public $isRequired;
 
-    public function get_form_editor_field_title()
+    public function __construct($data = array())
     {
-        return esc_attr__('Waardepapieren', 'gravityforms');
-    }
+        parent::__construct($data);
 
-    public function get_form_editor_button()
-    {
-        return array(
-            'group' => 'advanced_fields',
-            'text'  => $this->get_form_editor_field_title()
-        );
-    }
-
-    public function get_choices($value)
-    {
+        $this->label = 'Waardepapieren Type';
         $this->choices = [
             [
                 'text' => 'Akte van geboorte',
@@ -87,6 +76,24 @@ class GFFieldWaardePapier extends \GF_Field_Select
                 'value' => 'historisch_uittreksel_basis_registratie_personen',
             ]
         ];
-        return \GFCommon::get_select_choices($this, $value);
+        $this->isRequired = true;
+    }
+
+    public function get_form_editor_field_title()
+    {
+        return esc_attr__('Waardepapier Type', 'gravityforms');
+    }
+
+    public function get_form_editor_button()
+    {
+        return array(
+            'group' => 'advanced_fields',
+            'text'  => $this->get_form_editor_field_title()
+        );
+    }
+
+    public function get_field_label($bool, $value) {
+        $this->label = 'Waardepapieren Type';
+        return \GFCommon::get_label($this);
     }
 }
