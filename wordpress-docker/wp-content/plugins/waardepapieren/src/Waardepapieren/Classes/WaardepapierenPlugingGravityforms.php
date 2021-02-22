@@ -86,16 +86,51 @@ class WaardepapierenPlugingGravityforms
         //Response body
         $body     = json_decode(wp_remote_retrieve_body($data), true);
 
-//        var_dump($body);die();
-        var_dump(do_shortcode('[waardepapieren-result test="'.$body['@id'].'"]'));
-
-        // TODO go to a response page with download buttons...
+        $_SESSION['certificate'] = $body;
     }
 
     public function waardepapieren_result_shortcode($test): string
     {
-//        $test['test'] = 'hoi';
+        $document = '';
+        $x = true;
+        $i = 0;
+        while ($x) {
+            if (isset($_SESSION['certificate']['document'][$i])){
+                $document = $document . $_SESSION['certificate']['document'][$i];
+            } else {
+                $x = false;
+            }
+            $i++;
+        }
+        $documentButton = '<button style="margin-right: 15px"><a href="' . $document . '" download>download document</a></button>';
 
-        return $test['test'] . file_get_contents($this->plugin->getRootPath() . '/src/Waardepapieren/public/result.php');
+        $image = '';
+        $x = true;
+        $i = 0;
+        while ($x) {
+            if (isset($_SESSION['certificate']['image'][$i])){
+                $image = $image . $_SESSION['certificate']['image'][$i];
+            } else {
+                $x = false;
+            }
+            $i++;
+        }
+        $imageButton = '<button style="margin-right: 15px"><a href="' . $image . '" download>download image</a></button>';
+
+        $claim = '';
+        $x = true;
+        $i = 0;
+        while ($x) {
+            if (isset($_SESSION['certificate']['claim'][$i])){
+                $claim = $claim . $_SESSION['certificate']['claim'][$i];
+            } else {
+                $x = false;
+            }
+            $i++;
+        }
+        $claim = base64_encode(json_encode($claim));
+        $claimButton = '<button><a href="data:application/json;base64,' . $claim . '" download>download claim</a></button>';
+
+        return '<div style="text-align: center">' . $imageButton . $documentButton . $claimButton . '</div>';
     }
 }
