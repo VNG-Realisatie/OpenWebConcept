@@ -12,7 +12,7 @@ class WaardepapierenPlugingGravityforms
     {
         $this->plugin = $plugin;
 
-        add_shortcode('waardepapieren-form', [$this, 'waardepapieren_form_shortcode']);
+        add_shortcode('waardepapieren-result', [$this, 'waardepapieren_result_shortcode']);
 
         add_action('gform_loaded', [$this, 'load'], 5, 0);
         // Handle Gravity Form post:
@@ -87,17 +87,15 @@ class WaardepapierenPlugingGravityforms
         $body     = json_decode(wp_remote_retrieve_body($data), true);
 
 //        var_dump($body);die();
-//        var_dump(do_shortcode('[waardepapieren-form test="'.$body['@id'].'"]'));
+        var_dump(do_shortcode('[waardepapieren-result test="'.$body['@id'].'"]'));
 
         // TODO go to a response page with download buttons...
     }
 
-    public function waardepapieren_form_shortcode($test): string
+    public function waardepapieren_result_shortcode($test): string
     {
 //        $test['test'] = 'hoi';
-        $url = esc_url(admin_url('admin-post.php'));
-        $formtag = $test['test'].'<form action="' . $url . '" method="post">';
 
-        return $formtag . file_get_contents($this->plugin->getRootPath() . '/src/Waardepapieren/public/form.php');
+        return $test['test'] . file_get_contents($this->plugin->getRootPath() . '/src/Waardepapieren/public/result.php');
     }
 }
