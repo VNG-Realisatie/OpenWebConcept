@@ -2,10 +2,18 @@
 
 namespace OWC\Waardepapieren\Classes;
 
+use OWC\Waardepapieren\Foundation\Plugin;
+
 class WaardepapierenPlugingGravityforms
 {
-    public function __construct()
+    protected $plugin;
+
+    public function __construct(Plugin $plugin)
     {
+        $this->plugin = $plugin;
+
+        add_shortcode('waardepapieren-form', [$this, 'waardepapieren_form_shortcode']);
+
         add_action('gform_loaded', [$this, 'load'], 5, 0);
         // Handle Gravity Form post:
         add_action('gform_after_submission', function ($entry, $form) {
@@ -64,7 +72,6 @@ class WaardepapierenPlugingGravityforms
      */
     function waardepapieren_post($data)
     {
-
         $key = get_option('waardepapieren_api_key');
         $endpoint = get_option('waardepapieren_api_endpoint');
 
@@ -80,24 +87,17 @@ class WaardepapierenPlugingGravityforms
         $body     = json_decode(wp_remote_retrieve_body($data), true);
 
 //        var_dump($body);die();
+//        var_dump(do_shortcode('[waardepapieren-form test="'.$body['@id'].'"]'));
 
         // TODO go to a response page with download buttons...
-//        if ($_POST["format"] == "png") {
-//            header("Cache-Control: public"); // needed for internet explorer
-//            header("Content-Type: image/png");
-//            header("Content-Transfer-Encoding: Binary");
-//            header("Content-Disposition: attachment; filename=claim_" . $body["id"] . ".png");
-//            $image = explode(",", $body['image']);
-//            echo base64_decode($image[1]);
-//            die;
-//        } else {
-//            header("Cache-Control: public"); // needed for internet explorer
-//            header("Content-Type: application/pdf");
-//            header("Content-Transfer-Encoding: Binary");
-//            header("Content-Disposition: attachment; filename=claim_" . $body["id"] . ".pdf");
-//            $document = explode(",", $body['document']);
-//            echo base64_decode($document[1]);
-//            die;
-//        }
+    }
+
+    public function waardepapieren_form_shortcode($test): string
+    {
+//        $test['test'] = 'hoi';
+        $url = esc_url(admin_url('admin-post.php'));
+        $formtag = $test['test'].'<form action="' . $url . '" method="post">';
+
+        return $formtag . file_get_contents($this->plugin->getRootPath() . '/src/Waardepapieren/public/form.php');
     }
 }

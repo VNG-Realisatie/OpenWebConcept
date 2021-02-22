@@ -14,7 +14,7 @@ class WaardepapierenPluginShortcodes
         $this->plugin = $plugin;
 
         // The actual short codes
-        add_shortcode('waardepapieren-form', [$this, 'waardepapieren_form_shortcode']);
+//        add_shortcode('waardepapieren-form', [$this, 'waardepapieren_form_shortcode']);
         add_shortcode('waardepapieren-list', [$this, 'waardepapieren_list_shortcode']);
 
         // Form handling
@@ -22,13 +22,13 @@ class WaardepapierenPluginShortcodes
         add_action('admin_post_waardepapieren_form', [$this, 'waardepapieren_post']);
     }
 
-    public function waardepapieren_form_shortcode(): string
-    {
-        $url = esc_url(admin_url('admin-post.php'));
-        $formtag = '<form action="' . $url . '" method="post">';
-
-        return $formtag . file_get_contents($this->plugin->getRootPath() . '/src/Waardepapieren/public/form.php');
-    }
+//    public function waardepapieren_form_shortcode(): string
+//    {
+//        $url = esc_url(admin_url('admin-post.php'));
+//        $formtag = '<form action="' . $url . '" method="post">';
+//
+//        return $formtag . file_get_contents($this->plugin->getRootPath() . '/src/Waardepapieren/public/form.php');
+//    }
 
     public function waardepapieren_list_shortcode(): string
     {
