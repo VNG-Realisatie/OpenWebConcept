@@ -1,5 +1,4 @@
 
-
     <input type="hidden" name="action" value="waardepapieren_form">
     <select id="bsn" name="bsn" required="">
         <option value="" style="color: lightgrey;">Kies een persoon</option>
