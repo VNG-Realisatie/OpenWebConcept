@@ -43,9 +43,11 @@ $autoloader = new Autoloader();
  */
 $plugin = (new Plugin(__DIR__))->boot();
 
-function session_init() {
+/**
+ * Start session on init when there is none.
+ */
+add_action('init', function () {
     if (!session_id()) {
         session_start();
     }
-}
-add_action( 'init', 'session_init' );
+});
