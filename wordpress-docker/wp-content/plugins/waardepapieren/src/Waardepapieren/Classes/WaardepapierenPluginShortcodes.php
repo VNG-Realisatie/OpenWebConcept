@@ -14,66 +14,117 @@ class WaardepapierenPluginShortcodes
         $this->plugin = $plugin;
 
         // The actual short codes
-        add_shortcode('waardepapieren-form', [$this, 'waardepapieren_form_shortcode']);
-        add_shortcode('waardepapieren-list', [$this, 'waardepapieren_list_shortcode']);
+        add_shortcode('waardepapieren-result', [$this, 'waardepapieren_result_shortcode']);
 
         // Form handling
-        add_action('admin_post_nopriv_waardepapieren_form', [$this, 'waardepapieren_post']);
-        add_action('admin_post_waardepapieren_form', [$this, 'waardepapieren_post']);
-    }
+        // Handle Gravity Form post:
+        add_action('gform_after_submission', function ($entry, $form) {
+            foreach ($form['fields'] as $field) {
+                switch ($field['type']) {
+                    case 'waardepapier':
+                        $type = rgar($entry, (string) $field->id);
+                        break;
+                    case 'person':
+                        $bsn = rgar($entry, (string) $field->id);
+                        break;
+                }
+            }
 
-    public function waardepapieren_form_shortcode(): string
-    {
-        $url = esc_url(admin_url('admin-post.php'));
-        $formtag = '<form action="' . $url . '" method="post">';
+            if (!isset($type) || !isset($bsn)){
+                return;
+            }
 
-        return $formtag . file_get_contents($this->plugin->getRootPath() . '/src/Waardepapieren/public/form.php');
-    }
+            $organization = get_option('waardepapieren_organization');
 
-    public function waardepapieren_list_shortcode(): string
-    {
-        $url = esc_url(admin_url('admin-post.php'));
-        $formtag = '<form action="' . $url . '" method="post">';
+            $data = [
+                "person" => "https://waardepapieren-gemeentehoorn.commonground.nu/api/v1/brp/ingeschrevenpersonen/".$bsn,
+                "type" => $type,
+                "organization" => $organization
+            ];
 
-        return $formtag . file_get_contents($this->plugin->getRootPath() . '/src/Waardepapieren/public/list.php');
+            $this->waardepapieren_post($data);
+        }, 10, 2);
     }
 
     /**
-     * Catching the custom post
+     * Handles post from this Gravity Form that uses the advanced fields Waardepapier Person and Waardepapier Type.
+     *
+     * @param array $data should contain an array with a person, type and organization value.
      */
-    public function waardepapieren_post()
+    function waardepapieren_post($data)
     {
-        $organization = get_option('waardepapieren_organization');
-        $key          = get_option('waardepapieren_api_key');
-        $endpoint     = get_option('waardepapieren_api_endpoint');
+        $key = get_option('waardepapieren_api_key');
+        $endpoint = get_option('waardepapieren_api_endpoint');
 
-        $post = ["person" => $_POST["bsn"], "type" => $_POST["type"], "organization" => $organization];
-
+        //Do Post
         $data = wp_remote_post($endpoint, array(
             'headers'     => array('Content-Type' => 'application/json; charset=utf-8', 'Authorization' => $key),
-            'body'        => json_encode($post),
+            'body'        => json_encode($data),
             'method'      => 'POST',
             'data_format' => 'body',
         ));
 
-        $body = json_decode(wp_remote_retrieve_body($data), true);
+        //Response body
+        $body     = json_decode(wp_remote_retrieve_body($data), true);
 
-        if ($_POST["format"] == "png") {
-            header("Cache-Control: public"); // needed for internet explorer
-            header("Content-Type: image/png");
-            header("Content-Transfer-Encoding: Binary");
-            header("Content-Disposition: attachment; filename=claim_" . $body["id"] . ".png");
-            $image = explode(",", $body['image']);
-            echo base64_decode($image[1]);
-            die;
+        $_SESSION['certificate'] = $body;
+    }
+
+    // Result page shortcode
+    public function waardepapieren_result_shortcode(): string
+    {
+        $document = '';
+        $x = true;
+        $i = 0;
+        while ($x) {
+            if (isset($_SESSION['certificate']['document'][$i])){
+                $document = $document . $_SESSION['certificate']['document'][$i];
+            } else {
+                $x = false;
+            }
+            $i++;
+        }
+        $documentButton = '<button style="margin-right: 15px"><a href="' . $document . '" download>download document</a></button>';
+
+        $image = '';
+        $x = true;
+        $i = 0;
+        while ($x) {
+            if (isset($_SESSION['certificate']['image'][$i])){
+                $image = $image . $_SESSION['certificate']['image'][$i];
+            } else {
+                $x = false;
+            }
+            $i++;
+        }
+        $imageButton = '<button style="margin-right: 15px"><a href="' . $image . '" download>download image</a></button>';
+
+        $claim = '';
+        $x = true;
+        $i = 0;
+        while ($x) {
+            if (isset($_SESSION['certificate']['claim'][$i])){
+                $claim = $claim . $_SESSION['certificate']['claim'][$i];
+            } else {
+                $x = false;
+            }
+            $i++;
+        }
+        $claim = base64_encode(json_encode($claim));
+        $claimButton = '<button><a href="data:application/json;base64,' . $claim . '" download>download claim</a></button>';
+
+        $type = '';
+        $x = true;
+        $i = 0;
+        while ($x) {
+            if (isset($_SESSION['certificate']['type'][$i])){
+                $type = $type . $_SESSION['certificate']['type'][$i];
+            } else {
+                $x = false;
+            }
+            $i++;
         }
 
-        header("Cache-Control: public"); // needed for internet explorer
-        header("Content-Type: application/pdf");
-        header("Content-Transfer-Encoding: Binary");
-        header("Content-Disposition: attachment; filename=claim_" . $body["id"] . ".pdf");
-        $document = explode(",", $body['document']);
-        echo base64_decode($document[1]);
-        die;
+        return '<div style="text-align: center"> <h3>'. $type .'</h3>' . $imageButton . $documentButton . $claimButton . '</div>';
     }
 }
