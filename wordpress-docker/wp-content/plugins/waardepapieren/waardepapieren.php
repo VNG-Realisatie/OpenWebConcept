@@ -42,3 +42,12 @@ $autoloader = new Autoloader();
  * Begin execution of the plugin.
  */
 $plugin = (new Plugin(__DIR__))->boot();
+
+/**
+ * Start session on init when there is none.
+ */
+add_action('init', function () {
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+});
