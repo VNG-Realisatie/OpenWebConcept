@@ -8,7 +8,7 @@ class WaardepapierenPlugingGravityforms
 
     public function __construct()
     {
-        add_action('gform_loaded', [$this, 'load'], 5, 0);
+        add_action('gform_loaded', [$this, 'load'], 10, 0);
     }
 
     /*

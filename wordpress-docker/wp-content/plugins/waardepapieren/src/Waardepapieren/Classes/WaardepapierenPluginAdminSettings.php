@@ -62,7 +62,7 @@ class WaardepapierenPluginAdminSettings
     public function wporg_settings_init()
     {
         // register a new setting for "reading" page
-        register_setting('waardepapieren_options', 'waardepapieren_api_endpoint');
+        register_setting('waardepapieren_options', 'waardepapieren_api_domain');
         register_setting('waardepapieren_options', 'waardepapieren_api_key');
         register_setting('waardepapieren_options', 'waardepapieren_organization');
 
@@ -76,9 +76,9 @@ class WaardepapierenPluginAdminSettings
 
         // register a new field in the "wporg_settings_section" section, inside the "reading" page
         add_settings_field(
-            'waardepapieren_api_endpoint_field', // id
-            'API Endpoint',  // title
-            [$this, 'waardepapieren_api_endpoint_field_callback'], //callback
+            'waardepapieren_api_domain_field', // id
+            'API Domain',  // title
+            [$this, 'waardepapieren_api_domain_field_callback'], //callback
             'waardepapieren_api',
             'default'
         );
@@ -113,13 +113,13 @@ class WaardepapierenPluginAdminSettings
     }
 
     // field content cb
-    public function waardepapieren_api_endpoint_field_callback()
+    public function waardepapieren_api_domain_field_callback()
     {
         // get the value of the setting we've registered with register_setting()
-        $setting = get_option('waardepapieren_api_endpoint');
+        $setting = get_option('waardepapieren_api_domain');
         // output the field
     ?>
-        <input type="text" name="waardepapieren_api_endpoint" value="<?php echo isset($setting) ? esc_attr($setting) : ''; ?>">
+        <input type="text" name="waardepapieren_api_domain" value="<?php echo isset($setting) ? esc_attr($setting) : ''; ?>">
     <?php
     }
 
