@@ -47,7 +47,7 @@ $plugin = (new Plugin(__DIR__))->boot();
  * Start session on init when there is none.
  */
 add_action('init', function () {
-    if (!session_id()) {
+    if (session_status() === PHP_SESSION_NONE) {
         session_start();
     }
 });

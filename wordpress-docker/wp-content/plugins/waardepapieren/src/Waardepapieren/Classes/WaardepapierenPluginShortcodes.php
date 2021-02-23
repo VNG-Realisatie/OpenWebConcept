@@ -12,12 +12,17 @@ class WaardepapierenPluginShortcodes
     public function __construct(Plugin $plugin)
     {
         $this->plugin = $plugin;
+        $this->add_shortcode();
+        $this->load_hooks();
+    }
 
-        // The actual short codes
+    private function add_shortcode(): void
+    {
         add_shortcode('waardepapieren-result', [$this, 'waardepapieren_result_shortcode']);
+    }
 
-        // Form handling
-        // Handle Gravity Form post:
+    private function load_hooks(): void
+    {
         add_action('gform_after_submission', function ($entry, $form) {
             foreach ($form['fields'] as $field) {
                 switch ($field['type']) {
@@ -30,16 +35,16 @@ class WaardepapierenPluginShortcodes
                 }
             }
 
-            if (!isset($type) || !isset($bsn)){
+            $organization = get_option('waardepapieren_organization', '');
+
+            if (empty($type) || empty($bsn) || empty($organization)) {
                 return;
             }
 
-            $organization = get_option('waardepapieren_organization');
-
             $data = [
-                "person" => "https://waardepapieren-gemeentehoorn.commonground.nu/api/v1/brp/ingeschrevenpersonen/".$bsn,
-                "type" => $type,
-                "organization" => $organization
+                "person"        => "https://waardepapieren-gemeentehoorn.commonground.nu/api/v1/brp/ingeschrevenpersonen/" . $bsn,
+                "type"          => $type,
+                "organization"  => $organization
             ];
 
             $this->waardepapieren_post($data);
@@ -50,81 +55,102 @@ class WaardepapierenPluginShortcodes
      * Handles post from this Gravity Form that uses the advanced fields Waardepapier Person and Waardepapier Type.
      *
      * @param array $data should contain an array with a person, type and organization value.
+     * 
+     * @return void
      */
-    function waardepapieren_post($data)
+    public function waardepapieren_post(array $data): void
     {
-        $key = get_option('waardepapieren_api_key');
-        $endpoint = get_option('waardepapieren_api_endpoint');
+        $key      = get_option('waardepapieren_api_key', '');
+        $endpoint = get_option('waardepapieren_api_endpoint', '');
 
-        //Do Post
-        $data = wp_remote_post($endpoint, array(
-            'headers'     => array('Content-Type' => 'application/json; charset=utf-8', 'Authorization' => $key),
+        if (empty($key) || empty($endpoint)) {
+            return;
+        }
+
+        // unset any existing session.
+        unset($_SESSION['certificate']);
+
+        $data = wp_remote_post($endpoint, [
+            'headers'     => ['Content-Type' => 'application/json; charset=utf-8', 'Authorization' => $key],
             'body'        => json_encode($data),
             'method'      => 'POST',
             'data_format' => 'body',
-        ));
+        ]);
 
-        //Response body
-        $body     = json_decode(wp_remote_retrieve_body($data), true);
+        if (is_wp_error($data)) {
+            return;
+        }
 
-        $_SESSION['certificate'] = $body;
+        $responseBody = wp_remote_retrieve_body($data);
+
+        if (is_wp_error($responseBody)) {
+            return;
+        }
+
+        $decodedBody = json_decode($responseBody, true);
+
+        $_SESSION['certificate'] = $decodedBody;
     }
 
-    // Result page shortcode
+    /**
+     * Callback for shortcode [waardepapieren-result].
+     *
+     * @return string
+     */
     public function waardepapieren_result_shortcode(): string
     {
-        $document = '';
-        $x = true;
-        $i = 0;
-        while ($x) {
-            if (isset($_SESSION['certificate']['document'][$i])){
-                $document = $document . $_SESSION['certificate']['document'][$i];
-            } else {
-                $x = false;
-            }
-            $i++;
-        }
-        $documentButton = '<button style="margin-right: 15px"><a href="' . $document . '" download>download document</a></button>';
+        $downloadButtons = [];
 
-        $image = '';
-        $x = true;
-        $i = 0;
-        while ($x) {
-            if (isset($_SESSION['certificate']['image'][$i])){
-                $image = $image . $_SESSION['certificate']['image'][$i];
-            } else {
-                $x = false;
-            }
-            $i++;
-        }
-        $imageButton = '<button style="margin-right: 15px"><a href="' . $image . '" download>download image</a></button>';
-
-        $claim = '';
-        $x = true;
-        $i = 0;
-        while ($x) {
-            if (isset($_SESSION['certificate']['claim'][$i])){
-                $claim = $claim . $_SESSION['certificate']['claim'][$i];
-            } else {
-                $x = false;
-            }
-            $i++;
-        }
-        $claim = base64_encode(json_encode($claim));
-        $claimButton = '<button><a href="data:application/json;base64,' . $claim . '" download>download claim</a></button>';
-
-        $type = '';
-        $x = true;
-        $i = 0;
-        while ($x) {
-            if (isset($_SESSION['certificate']['type'][$i])){
-                $type = $type . $_SESSION['certificate']['type'][$i];
-            } else {
-                $x = false;
-            }
-            $i++;
+        if (!empty($_SESSION['certificate']['document'])) {
+            $downloadButtons[] = $this->createButton($_SESSION['certificate']['document'], 'document');
         }
 
-        return '<div style="text-align: center"> <h3>'. $type .'</h3>' . $imageButton . $documentButton . $claimButton . '</div>';
+        if (!empty($_SESSION['certificate']['image'])) {
+            $downloadButtons[] = $this->createButton($_SESSION['certificate']['image'], 'image');
+        }
+
+        if (!empty($_SESSION['certificate']['claim'])) {
+            $claim             = $_SESSION['certificate']['claim'];
+            $claim             = base64_encode(json_encode($claim));
+            $downloadButtons[] = $this->createButton($claim, 'claim', true);
+        }
+
+        $type = $_SESSION['certificate']['type'] ?? 'Type onbekend';
+
+        return $this->shortcodeResult($type, $downloadButtons);
+    }
+
+    /**
+     * Create html for the download button.
+     *
+     * @param string $value
+     * @param string $type
+     * @param boolean $isClaim
+     * 
+     * @return string
+     */
+    private function createButton(string $value, string $type, bool $isClaim = false): string
+    {
+        if ($isClaim) {
+            return '<button><a href="data:application/json;base64,' . $value . '" download>download ' . $type . '</a></button>';
+        }
+
+        return '<button style="margin-right: 15px"><a href="' . $value . '" download>download ' . $type . '</a></button>';
+    }
+
+    /**
+     * Create html for the result of the shortcode.
+     *
+     * @param string $type
+     * @param array $downloadButtons
+     * 
+     * @return string
+     */
+    private function shortcodeResult(string $type, array $downloadButtons): string
+    {
+        if (empty($downloadButtons)) {
+            return '<div style="text-align: center">' . esc_html__('Er ging iets fout met het ophalen van uw gegevens.', 'waardepapierenaddon') . '</div>';
+        }
+        return '<div style="text-align: center"> <h3>' . ucfirst(str_replace('_', ' ', $type)) . '</h3>' . implode(" ", $downloadButtons) . '</div>';
     }
 }
