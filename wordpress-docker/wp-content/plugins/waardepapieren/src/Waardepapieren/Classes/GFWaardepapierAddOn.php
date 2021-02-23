@@ -16,11 +16,28 @@ class GFWaardepapierAddOn extends \GFAddOn
     protected $_full_path = __FILE__;
     protected $_title = 'Gravity Forms Waardepapieren Add-On';
     protected $_short_title = 'Waardepapieren Add-On';
+    private static $_instance = null;
 
     public function init(): void
     {
         parent::init();
         add_filter('gform_submit_button', [$this, 'form_submit_button'], 10, 2);
+    }
+
+    /**
+     * Returns an instance of this class, and stores it in the $_instance property.
+     *
+     * @return GFWaardepapierAddOn
+     */
+    public static function get_instance(): GFWaardepapierAddOn
+    {
+        $class = static::class;
+
+        if (!isset(self::$_instance[$class])) {
+            self::$_instance[$class] = new static();
+        }
+
+        return self::$_instance[$class];
     }
 
     public function scripts(): array
