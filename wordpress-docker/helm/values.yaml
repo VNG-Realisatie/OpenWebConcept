@@ -1,6 +1,6 @@
 settings:
   registryBase: docker.io/conduction
-  name: openweb-concept
+  name: open-webconcept
   pullPolicy: Always
   replicaCount: 1
   env: prod
