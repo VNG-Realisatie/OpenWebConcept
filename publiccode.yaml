@@ -1,29 +1,10 @@
 publiccodeYmlVersion: "0.2"
 
-name: owc
+name: OpenWebConcept
 applicationSuite: commonground
-url: "https://github.com/ConductionNL/commongroundnu"
-landingURL: "dev.commonground.nu" 
-isBasedOn: "https://github.com/ConductionNL/Proto-component-commonground.git" 
+url: "https://github.com/VNG-Realisatie/OpenWebConcept"
 softwareVersion: "V1.0"
 releaseDate: "2021-31-01"
-logo: www.commonground.nl
-monochromeLogo: img/logo-mono.svg
-
-inputTypes:
-  - application/json
-  - application/xml
-  
-outputTypes:
-  - application/json
-  - application/ld+json
-  - application/hal+json
-  - application/vnd.api+json
-  - application/health+json
-  - application/xml
-  - application/x-yaml
-  - text/csv
-  - text/html
 
 platforms:
   - web
@@ -31,64 +12,22 @@ platforms:
   - nlx
 
 categories:
-  - it-development 
-
-usedBy:
-  - Gemeente Utrecht
-  - Gemeente Den Haag
-  - Gemeente Hoorn
-  
-
-roadmap: "https://github.com/ConductionNL/commongroundnu/blob/master/ROADMAP.md"
+  - it-development
 
 developmentStatus: development
 
-softwareType: "standalone/other"
-
-#intendedAudience:
-#  scope:
-#    - science-and-technology
-#  countries:
-#    - it
-#    - de
-#  unsupportedCountries:
-#    - us
+softwareType: "standalone/web"
 
 description:
-  en:
-#    localisedName: Medusa
-#    genericName: Text Editor
-#    shortDescription: >
-#          This description can have a maximum 150
-#          characters long. We should not fill the
-#          remaining space with "Lorem Ipsum". End
-#
-#    longDescription: >
-#          Very long description of this software, also split
-#          on multiple rows. You should note what the software
-#          is and why one should need it.
-
-    documentation: "https://github.com/ConductionNL/commongroundnu/blob/master/README.md"
-    apiDocumentation: "dev.commonground.nu"
-#
-#    features:
-#       - Very important feature
-#       - Will run without a problem
-#       - Has zero bugs
-#       - Solves all the problems of the world
-#    screenshots:
-#       - img/sshot1.jpg
-#       - img/sshot2.jpg
-#       - img/sshot3.jpg
-#    videos:
-#       - https://youtube.com/xxxxxxxx
-#    awards:
-#       - 1st Price Software of the year
+  nl:
+    genericName: "Openweb Concept"
+    shortDescription: "Binnen het Open Webconcept werken gemeenten en bedrijven samen aan componenten voor de digitale dienstverlening van de overheid."
+    longDescription: "Binnen het Open Webconcept werken gemeenten en bedrijven samen aan componenten voor de digitale dienstverlening van de overheid. Gemeenten zijn eigenaar van deze componenten en beheren deze in hun eigen code beheerplatformen als Github en Bitbucket. Op deze VNG GitHub hebben we een Wordpress-docker staan waarmee je alle bouwstenen eenvoudig zelf kunt installeren. In de Open Webconcept Wordpress-plugin staat de code om alle componenten te kunnen installeren. Deze Wordpress-plugin maakt gebruik van het bestand componenten.xml die je ook in deze VNG Github omgeving kunt vinden. Alle componenten die nu zijn ontwikkeld maken gebruik van Wordpress beheeromgeving en ontsluiten de opgeslagen data via API's. Op deze manier kunnen de componenten als losse (data)diensten ingezet worden door marktpartijen en gemeenten bij hun digitale dienstverlening. Ook online toepassingen die niet zijn gebaseerd op Wordpress kunnen van de API's van de Open Webconcept componenten gebruik maken! Met deze diensten ondersteund de Open Webconcept beweging het Common Ground gedachtengoed (API gestuurd) Met deze aanpak wil de Open Webconcept beweging de marktwerking rond de ICT-dienstverlening binnen de overheid vergroten. Inmiddels zijn er ook al meerdere bedrijven die de componenten hebben geinstalleerd en als dienst voor gemeenten inzetten!"
 
 legal:
   license: EUPL-1.2
   mainCopyrightOwner: Open Webconcept
-  repoOwner: Conduction
+  repoOwner: VNG
   authorsFile: AUTHORS.md
 
 maintenance:
@@ -118,4 +57,4 @@ dependsOn:
 
 installations:
   - type: helm
-    url: "https://raw.githubusercontent.com/ConductionNL/OpenWebConcept/master/wordpress-docker/helm/"
+    url: "https://raw.githubusercontent.com/VNG-Realisatie/OpenWebConcept/master/wordpress-docker/helm/"
