@@ -54,6 +54,7 @@ dependsOn:
   open:
     - name: Kubernetes
       versionMin: "1.15.5-do.1"
+    - name: open-webconcept/open-webconcept
 
 installations:
   - type: helm
