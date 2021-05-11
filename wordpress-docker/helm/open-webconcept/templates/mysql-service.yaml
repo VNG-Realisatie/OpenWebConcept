@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.settings.name }}-mysql
+  labels:
+    app.kubernetes.io/name: {{ .Values.settings.name }}-mysql
+    app.kubernetes.io/part-of: {{ .Values.settings.name }}
+    helm.sh/chart: {{ include "chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  type: ClusterIP
+  ports:
+    - name: mysql
+      port: {{ .Values.mysql.port }}
+  selector:
+    app.kubernetes.io/name: {{ .Values.settings.name }}-mysql
+    app.kubernetes.io/instance: {{ .Release.Name }}
