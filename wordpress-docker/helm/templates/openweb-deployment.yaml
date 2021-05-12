@@ -1,0 +1,97 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.settings.name }}-wordpress
+  labels:
+    app.kubernetes.io/name: {{ .Values.settings.name }}-wordpress
+    app.kubernetes.io/part-of: {{ .Values.settings.name }}
+    helm.sh/chart: {{ include "chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ .Values.settings.name }}-wordpress
+  replicas: {{ .Values.settings.replicaCount }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ .Values.settings.name }}-wordpress
+        app.kubernetes.io/part-of: {{ .Values.settings.name }}
+        helm.sh/chart: {{ include "chart" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+        app.kubernetes.io/managed-by: {{ .Release.Service }}
+    spec:
+      volumes:
+        - name: {{ .Values.openweb.volume.name }}
+          persistentVolumeClaim:
+            claimName: {{ .Values.openweb.volume.claimName }}
+
+      containers:
+        - name: {{ .Values.settings.name }}-wordpress
+          image: "{{ .Values.settings.registryBase }}/openwebconcept:4.8"
+          imagePullPolicy: {{ .Values.settings.pullPolicy }}
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: {{ .Values.openweb.volume.name }}
+              mountPath: /bitnami/wordpress
+              subPath: wordpress
+          env:
+            - name: WORDPRESS_SCHEME
+              value: http
+            - name: WORDPRESS_DB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Values.settings.name }}-configmap
+                  key: mariadb-host
+            - name: WORDPRESS_DB_PORT_NUMBER
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Values.settings.name }}-configmap
+                  key: mariadb-port
+            - name: WORDPRESS_DB_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Values.settings.name }}-configmap
+                  key: mariadb-name
+            - name: WORDPRESS_DB_USER
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Values.settings.name }}-configmap
+                  key: mariadb-user
+            - name: WORDPRESS_DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "fullname" . }}
+                  key: mariadb-password
+            - name: WORDPRESS_TABLE_PREFIX
+              value: 'wp_'
+            - name: WORDPRESS_SKIP_INSTALL
+              value: 'yes'
+            - name: WORDPRESS_SITEURL
+              {{- if and (eq $.Values.settings.env "prod") $.Values.settings.subpath }}
+              value: http://{{ $.Values.settings.domain }}/{{ $.Values.settings.subpath }}
+              {{- else if eq $.Values.settings.env "prod" }}
+              value: http://{{ $.Values.settings.domain }}
+              {{- else if $.Values.settings.subpath }}
+              value: http://{{ $.Values.settings.env }}.{{ $.Values.settings.domain }}/{{ $.Values.settings.subpath }}
+              {{- else }}
+              value: http://{{ $.Values.settings.env }}.{{ $.Values.settings.domain }}
+              {{- end }}
+            - name: WORDPRESS_HOME
+              {{- if and (eq $.Values.settings.env "prod") $.Values.settings.subpath }}
+              value: http://{{ $.Values.settings.domain }}/{{ $.Values.settings.subpath }}
+              {{- else if eq $.Values.settings.env "prod" }}
+              value: http://{{ $.Values.settings.domain }}
+              {{- else if $.Values.settings.subpath }}
+              value: http://{{ $.Values.settings.env }}.{{ $.Values.settings.domain }}/{{ $.Values.settings.subpath }}
+              {{- else }}
+              value: http://{{ $.Values.settings.env }}.{{ $.Values.settings.domain }}
+              {{- end }}
+          resources:
+  {{ toYaml .Values.resources | indent 12 }}
+  {{- if .Values.nodeSelector }}
+nodeSelector:
+  {{ toYaml .Values.nodeSelector | indent 8 }}
+  {{- end }}

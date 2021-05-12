@@ -1,0 +1,61 @@
+publiccodeYmlVersion: "0.2"
+
+name: OpenWebConcept
+applicationSuite: commonground
+url: "https://github.com/VNG-Realisatie/OpenWebConcept"
+softwareVersion: "V1.0"
+releaseDate: "2021-31-01"
+
+platforms:
+  - web
+  - haven
+  - nlx
+
+categories:
+  - it-development
+
+developmentStatus: development
+
+softwareType: "standalone/web"
+
+description:
+  nl:
+    genericName: "Openweb Concept"
+    shortDescription: "Binnen het Open Webconcept werken gemeenten en bedrijven samen aan componenten voor de digitale dienstverlening van de overheid."
+    longDescription: "Binnen het Open Webconcept werken gemeenten en bedrijven samen aan componenten voor de digitale dienstverlening van de overheid. Gemeenten zijn eigenaar van deze componenten en beheren deze in hun eigen code beheerplatformen als Github en Bitbucket. Op deze VNG GitHub hebben we een Wordpress-docker staan waarmee je alle bouwstenen eenvoudig zelf kunt installeren. In de Open Webconcept Wordpress-plugin staat de code om alle componenten te kunnen installeren. Deze Wordpress-plugin maakt gebruik van het bestand componenten.xml die je ook in deze VNG Github omgeving kunt vinden. Alle componenten die nu zijn ontwikkeld maken gebruik van Wordpress beheeromgeving en ontsluiten de opgeslagen data via API's. Op deze manier kunnen de componenten als losse (data)diensten ingezet worden door marktpartijen en gemeenten bij hun digitale dienstverlening. Ook online toepassingen die niet zijn gebaseerd op Wordpress kunnen van de API's van de Open Webconcept componenten gebruik maken! Met deze diensten ondersteund de Open Webconcept beweging het Common Ground gedachtengoed (API gestuurd) Met deze aanpak wil de Open Webconcept beweging de marktwerking rond de ICT-dienstverlening binnen de overheid vergroten. Inmiddels zijn er ook al meerdere bedrijven die de componenten hebben geinstalleerd en als dienst voor gemeenten inzetten!"
+
+legal:
+  license: EUPL-1.2
+  mainCopyrightOwner: Open Webconcept
+  repoOwner: VNG
+  authorsFile: AUTHORS.md
+
+maintenance:
+  type: "external"
+
+  contractors:
+    - name: "Conduction B.V"
+      email: "info@conduction.nl"
+      website: "https://www.conduction.nl"
+      until: "2099-01-01"
+
+  contacts:
+    - name: Ruben van der Linde
+      email: "ruben@conduction.nl"
+      affiliation: "Conduction B.V"
+
+localisation:
+  localisationReady: yes
+  availableLanguages:
+    - en
+    - nl
+
+dependsOn:
+  open:
+    - name: Kubernetes
+      versionMin: "1.15.5-do.1"
+    - name: open-webconcept/open-webconcept
+
+installations:
+  - type: helm
+    url: "https://raw.githubusercontent.com/VNG-Realisatie/OpenWebConcept/master/wordpress-docker/helm/"

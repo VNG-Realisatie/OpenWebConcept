@@ -1,0 +1,58 @@
+settings:
+  registryBase: docker.io/conduction
+  name: open-webconcept
+  pullPolicy: Always
+  replicaCount: 1
+  env: prod
+  subpath: ''
+  domain: zuid-drecht.nl
+
+mysql:
+  port: 3306
+  name: openweb
+  user: openweb
+  password: '!changeMe!'
+  rootPassword: '!changeMe!'
+  volume:
+    claimName: openweb-database
+    size: 8Gi
+
+openweb:
+  volume:
+    name: openweb-data
+    claimName: openweb-data
+    size: 10Gi
+
+busybox:
+  image: "busybox"
+  tag: "1.32"
+
+ingress:
+  annotations:
+  # kubernetes.io/ingress.global-static-ip-name: chart-ip
+  # kubernetes.io/ingress.class: gce
+  # kubernetes.io/tls-acme: "true"
+  tls:
+  # Secrets must be manually created in the namespace, you can also use cert-manager.
+  # - hosts:
+  # - example.com
+  # - mercure.example.com
+  hosts:
+    api:
+      host: example.com
+      serviceName: varnish
+    mercure:
+      host: mercure.example.com
+      serviceName: mercure
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #  cpu: 100m
+  #  memory: 128Mi
+  # requests:
+  #  cpu: 100m
+#  memory: 128Mi

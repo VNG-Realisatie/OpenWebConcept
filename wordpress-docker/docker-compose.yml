@@ -4,7 +4,7 @@ services:
     depends_on:
       - db
     build: Dockerfiles/wordpress
-    image: wordpress:4.8
+    image: conduction/openwebconcept:4.8
     restart: always
     volumes:
       - ./wp-content:/var/www/html/wp-content
@@ -15,14 +15,14 @@ services:
     networks:
       - back
   db:
-    build: Dockerfiles/mysql
+#    build: Dockerfiles/mysql
     image: mysql:5.7
-    restart: always
     volumes:
-       - ./tmp/db_data:/var/lib/mysql
+       - db_data:/var/lib/mysql:rw
     command: ["--ignore-db-dir=lost+found", "--innodb_use_native_aio=0"]
     environment:
       MYSQL_ROOT_PASSWORD: wp_project
+      MYSQL_DATABASE: wp_project
     networks:
       - back
   phpmyadmin:
@@ -40,4 +40,4 @@ services:
 networks:
   back:
 volumes:
-  db_data:
+  db_data: {}
