@@ -9,7 +9,7 @@ Ook online toepassingen die niet zijn gebaseerd op Wordpress kunnen van de API's
 Met deze diensten ondersteund de Open Webconcept beweging het Common Ground gedachtengoed (API gestuurd)
 Met deze aanpak wil de Open Webconcept beweging de marktwerking rond de ICT-dienstverlening binnen de overheid vergroten. Inmiddels zijn er ook al meerdere bedrijven die de componenten hebben geinstalleerd en als dienst voor gemeenten inzetten!
 
-[intentieverklaring](Intentieverklaring Wordpress Open Webconcept.pdf)
+De oorsprongkelijke [intentieverklaring](../../blob/master/Intentieverklaring%20Wordpress%20Open%20Webconcept.pdf)
 
 # Repository verplaatst
 Deze repository is opgeschoond en voor archief doeleinden verplaatst naar: https://github.com/OpenWebconcept/-Archief-Openwebconcept 
