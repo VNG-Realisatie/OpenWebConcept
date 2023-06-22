@@ -12,8 +12,9 @@ Met deze aanpak wil de Open Webconcept beweging de marktwerking rond de ICT-dien
 De oorspronkelijke [intentieverklaring](../../blob/master/Intentieverklaring%20Wordpress%20Open%20Webconcept.pdf)
 
 # Repository verplaatst
-Deze repository is opgeschoond en voor archief doeleinden verplaatst naar: https://github.com/OpenWebconcept/-Archief-Openwebconcept 
+De "echte" repository van het Open WebConcept bevind zich op de locatie: http://github.com/openwebconcept/
 De website van het openwebconcept val te vinden op: https://openwebconcept.nl/
+(deze repository is opgeschoond en voor archief doeleinden verplaatst naar: https://github.com/OpenWebconcept/-Archief-Openwebconcept )
 
 
 ## Fieldlab dienstverlening september 2018
