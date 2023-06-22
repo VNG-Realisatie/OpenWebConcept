@@ -2,7 +2,8 @@ publiccodeYmlVersion: "0.2"
 
 name: OpenWebConcept
 applicationSuite: commonground
-url: "https://github.com/VNG-Realisatie/OpenWebConcept"
+#url: "https://github.com/VNG-Realisatie/OpenWebConcept"
+url: "http://github.com/openwebconcept/"
 softwareVersion: "V1.0"
 releaseDate: "2021-31-01"
 
