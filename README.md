@@ -1,3 +1,8 @@
+| Eigenaar | Ingevuld door |
+| --- | --- |
+| VNG Fieldlabs | Eduard Witteveen |
+<hr/>
+
 # Open Webconcept
 Binnen het Open Webconcept werken gemeenten en bedrijven samen aan componenten voor de digitale dienstverlening van de overheid.
 Gemeenten zijn eigenaar van deze componenten en beheren deze in hun eigen code beheerplatformen als Github en Bitbucket.
